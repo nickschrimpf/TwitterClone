@@ -1,1 +1,14 @@
-<p>new-tweet works!</p>
+<!-- <button>New tweet</button> -->
+<form #tweet="ngForm" (ngSubmit)="onSubmit(tweet)">
+    <div class="form-group">
+        <label>new tweet</label>
+        <input
+            placeholder="tweet tweet" 
+            maxlength="180" 
+            type="text"
+            name="newTweet"
+            ngModel
+            required>
+        <button [disabled]="!tweet.valid" type="submit">tweet</button>
+    </div>      
+</form>

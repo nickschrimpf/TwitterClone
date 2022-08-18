@@ -101,6 +101,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "twitterClone:build:production",
+            "firebaseProject": "twitterclone-51191",
+            "firebaseHostingSite": "twitterclone-51191"
+          }
         }
       }
     }
