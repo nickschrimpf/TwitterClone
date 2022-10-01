@@ -9,7 +9,7 @@
         <div class="menu">
             <div class="account">
                 <div class="account__profile">
-                    <button *ngIf="this.userProfile" routerLink="/{{[this.userProfile.flutterName]}}" (click)="onToggleSidenav()" mat-icon-button>
+                    <button *ngIf="this.userProfile" routerLink='/{{[this.userProfile.flutterName]}}' (click)="onToggleSidenav()" mat-icon-button>
                         <img src="{{this.userProfile.profilePhotoURL}}" alt="photo">
                     </button>
                     <button mat-icon-button>
