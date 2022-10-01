@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit} from '@angular/core';
 import { Location } from '@angular/common';
-import {  FormControl, FormGroup} from '@angular/forms';
+import {  UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import { ActivatedRoute, Params, Router} from '@angular/router';
 import {  Observable, Subscription } from 'rxjs';
 import { UserService } from 'src/app/auth/user.service';
@@ -14,7 +14,7 @@ import { finalize, map } from 'rxjs/operators';
   styleUrls: ['./profile-edit.component.css']
 })
 export class ProfileEditComponent implements OnInit, OnDestroy {
-  profileForm:FormGroup;
+  profileForm:UntypedFormGroup;
   userProfile
   profileSub:Subscription;
   bannerPhotoURL;
@@ -57,13 +57,13 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     let location = '';
     let website = '';
     
-    this.profileForm = new FormGroup({
-      'displayName':new FormControl(profileName),
-      'bio':new FormControl(bio),
-      'location':new FormControl(location),
-      'website':new FormControl(website),
-      'profilePhotoURL':new FormControl(profilePhotoURL),
-      'bannerPhotoURL':new FormControl(bannerPhotoURL)
+    this.profileForm = new UntypedFormGroup({
+      'displayName':new UntypedFormControl(profileName),
+      'bio':new UntypedFormControl(bio),
+      'location':new UntypedFormControl(location),
+      'website':new UntypedFormControl(website),
+      'profilePhotoURL':new UntypedFormControl(profilePhotoURL),
+      'bannerPhotoURL':new UntypedFormControl(bannerPhotoURL)
     })
   }
   onSubmit(){

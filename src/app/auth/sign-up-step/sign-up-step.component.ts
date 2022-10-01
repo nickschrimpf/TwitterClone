@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, NgForm, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormControl, UntypedFormGroup, NgForm, ValidationErrors, Validators } from '@angular/forms';
 import { UniqueFlutterNameService } from '../unique-flutter-name.service';
 import { UserService } from '../user.service';
 
@@ -11,7 +11,7 @@ import { UserService } from '../user.service';
   styleUrls: ['./sign-up-step.component.css']
 })
 export class SignUpStepComponent implements OnInit, Validators {
-  userProfileForm:FormGroup;
+  userProfileForm:UntypedFormGroup;
 
   constructor(private userService:UserService, private uniqueFNS:UniqueFlutterNameService) { }
 
@@ -25,8 +25,8 @@ export class SignUpStepComponent implements OnInit, Validators {
 
   private initForm(){
     let flutterName = '';
-    this.userProfileForm = new FormGroup({
-      'flutterName': new FormControl(flutterName,
+    this.userProfileForm = new UntypedFormGroup({
+      'flutterName': new UntypedFormControl(flutterName,
         {
           validators:[Validators.required,Validators.maxLength(15), Validators.minLength(8)],
           asyncValidators:this.uniqueFNS.isUnique(this.userProfileForm),

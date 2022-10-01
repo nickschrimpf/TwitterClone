@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, NgForm, Validators } from '@angular/forms';
 import { UserService } from 'src/app/auth/user.service';
 import { TimelineService } from '../timeline.service';
 // import {ThemePalette} from '@angular/material/core';
@@ -14,7 +14,7 @@ import { TimelineService } from '../timeline.service';
 export class NewTweetComponent implements OnInit {
   showNewTweet = false;
   showTweetGroup = false;
-  tweetForm:FormGroup;
+  tweetForm:UntypedFormGroup;
   tweetDraft = ' ';
   characterCounter = 0;
   progressbar:number;
@@ -45,8 +45,8 @@ export class NewTweetComponent implements OnInit {
   private initForm(){
     let tweet = "";
 
-    this.tweetForm = new FormGroup({
-      'tweet' : new FormControl(tweet,Validators.required)
+    this.tweetForm = new UntypedFormGroup({
+      'tweet' : new UntypedFormControl(tweet,Validators.required)
     })
   }
 
