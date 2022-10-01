@@ -1,0 +1,36 @@
+mat-drawer-container{
+    height: 100%;
+    width:75vw;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}
+.menu{
+    display: flex;
+    flex-direction: column;
+    padding:10px;
+}
+.account__profile{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+.account__profile img{
+    max-height: 38px;
+}
+.account__name_handle{
+    display: flex;
+    flex-direction: column;
+}
+.followers{
+    display: flex;
+}
+.menu__items{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

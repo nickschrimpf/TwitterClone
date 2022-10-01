@@ -1,0 +1,56 @@
+.banner{
+    position: fixed;
+    top:0;
+    right: 0;
+    left: 0;
+    display:flex;
+    background-color: rgba(255,255,255,.65);
+    backdrop-filter: blur(12px);
+    z-index: 2;
+    height: 50px;
+    scroll-margin-bottom: 1px;
+    align-items: center;
+}
+.banner__welcome{
+    display: flex;
+    width: 100%;
+}
+.brandIcon__welcome{
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+.banner__timeline{
+    display:flex;
+
+}
+.welcome__filler{
+    display:flex;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 50%;
+    flex-shrink: 1;
+    flex-grow: 1;
+    width: 100%;
+}
+.banner__back{
+    
+    display: flex;
+    flex-basis: 45%;
+    min-width: 53px;
+    min-height: 30px;
+    flex-shrink: 1;
+    flex-grow: 1;
+    width: 100%;
+}
+.banner_text{
+    display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 17px;
+}
+
+@media screen and (min-width: 500px) {
+  
+}

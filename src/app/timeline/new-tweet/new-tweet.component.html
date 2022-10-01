@@ -1,14 +1,166 @@
-<!-- <button>New tweet</button> -->
-<form #tweet="ngForm" (ngSubmit)="onSubmit(tweet)">
-    <div class="form-group">
-        <label>new tweet</label>
-        <input
-            placeholder="tweet tweet" 
-            maxlength="180" 
-            type="text"
-            name="newTweet"
-            ngModel
-            required>
-        <button [disabled]="!tweet.valid" type="submit">tweet</button>
-    </div>      
-</form>
+<div class="newTweetButton">
+    <button mat-fab color="primary" (click)="this.showNewTweet=true">
+        <mat-icon>history_edu</mat-icon>
+    </button>
+</div>
+
+<!-- **IN TIMELINE TWEET FORM FOR SCREENS 500px OR ABOVE** -->
+<div class="lrgTweetForm">
+    <div class="lrgTweetForm_group">
+        <form [formGroup]="tweetForm" (ngSubmit)="onSubmit()">
+            <div class="tweet_body">
+                <div class="accountPicture">
+                    <mat-icon color="primary" class="accountIcon">account_circle</mat-icon>
+                </div>
+            <!-- ADD A SNACK BAR FOR THIS MENU -->
+                <div class="lrgTweeForm__body">
+                    <div *ngIf="showTweetGroup" class="visabilitySelectorContainer">
+                        <div  class="selector">
+                            <span color="primary">Everyone</span>
+                            <mat-icon color="primary">expand_more</mat-icon>
+                        </div>
+                    </div>
+                    <mat-form-field>
+                        <div class="form-group">
+                            <textarea
+                               formControlName="tweet"
+                                (mousedown)="showTweetGroup = true"
+                                placeholder="What's happening?" 
+                                maxlength="180" 
+                                type="text"
+                                name="tweet"
+                                matInput
+                                autocomplete="on"
+                                required>
+                            </textarea>
+                        </div> 
+                    </mat-form-field>
+                    <div class="lrgformOptions">
+
+                        <!-- NEED TO MAKE THIS A BUTTON AND ADD A SNACK BAR -->
+                        <div *ngIf="showTweetGroup" class="lrgRepyGroup">
+                            <mat-icon color="primary">public</mat-icon>
+                            <span>Everyone can replay</span>
+                        
+                        </div>
+
+                        
+                        <div class="lrgTweetOptions">
+                            <div class="lrgTweetOptions_buttons">
+                                <button mat-icon-button color="primary" type="button">
+                                    <mat-icon>image</mat-icon>
+                                </button>
+                                <button mat-icon-button color="primary" type="button">
+                                    <mat-icon>gif_box</mat-icon>
+                                </button>
+                                <button mat-icon-button color="primary" type="button">
+                                    <mat-icon>align_horizontal_left</mat-icon>
+                                </button>
+                                <button mat-icon-button color="primary" type="button">
+                                    <mat-icon>mood</mat-icon>
+                                </button>
+                                <button mat-icon-button color="primary" type="button">
+                                    <mat-icon>event</mat-icon>
+                                </button>
+                                <button mat-icon-button color="primary" type="button">
+                                    <mat-icon>location_on</mat-icon>
+                                </button>
+                            </div>
+                            <div class="lrgTweetOptions_rightSide">
+                                <div class="countSpinner">
+                                    <mat-progress-spinner diameter="20" color="accent" value={{this.progressbar}}>
+                                    </mat-progress-spinner>
+                                </div>
+                                <div class="startThread" *ngIf="this.progressbar > 0">
+                                    <button color="primary" mat-icon-button type="button">
+                                        <mat-icon >add_circle_outline</mat-icon>
+                                    </button>
+                                </div>
+                            
+                                <div class="lrgTweetButton">
+                                    <button mat-raised-button color="primary"  type="submit">
+                                        Tweet
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+    <!-- *** MOBILE FORM *** -->
+<div *ngIf="this.showNewTweet" class="tweet_form">
+    <div class="backButton">
+        <button mat-icon-button color="primary" (click)="toggleNewTweet()" >
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+    </div>
+    <div class="completeForm">
+        <form [formGroup]="tweetForm" (ngSubmit)="onSubmit()">
+            <div class="tweetButton">
+                <button mat-raised-button color="primary"  type="submit">
+                    Tweet
+                </button>
+            </div>
+            
+            <div class="formBody">
+                <div class="accountPicture">
+                    <mat-icon color="primary" class="accountIcon">account_circle</mat-icon>
+                </div>
+                <div class="visabilitySelector">
+                    <div class="visabilitySelectorContainer">
+                        <div  class="selector">
+                            <span color="primary">Everyone</span>
+                            <mat-icon color="primary">expand_more</mat-icon>
+                        </div>
+                    </div>
+                    <mat-form-field>
+                        <div class="form-group">
+                            <textarea
+                                formControlName="tweet"
+                                placeholder="What's happening?" 
+                                maxlength="180" 
+                                type="text"
+                                name="tweet"
+                                matInput
+                                autocomplete="on"
+                                required>
+                            </textarea>
+                        </div> 
+                    </mat-form-field>
+                    <div class="formOptions">
+                        <!-- NEED TO MAKE THIS A BUTTON AND ADD A SNACK BAR -->
+                        <div class="repySelector">
+                            <mat-icon color="primary">public</mat-icon>
+                            <span>Everyone can replay</span>    
+                        </div>
+                        <hr>
+                        <div class="iconOptions">
+                            <button mat-icon-button color="primary" type="button">
+                                <mat-icon>image</mat-icon>
+                            </button>
+                            <button mat-icon-button color="primary" type="button">
+                                <mat-icon>gif_box</mat-icon>
+                            </button>
+                            <button mat-icon-button color="primary" type="button">
+                                <mat-icon>align_horizontal_left</mat-icon>
+                            </button>
+                            <button mat-icon-button color="primary" type="button">
+                                <mat-icon>mood</mat-icon>
+                            </button>
+                            <button mat-icon-button color="primary" type="button">
+                                <mat-icon>event</mat-icon>
+                            </button>
+                            <button mat-icon-button color="primary" type="button">
+                                <mat-icon>location_on</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

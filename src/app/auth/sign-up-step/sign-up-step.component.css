@@ -1,0 +1,22 @@
+.signup-step{
+    position:fixed;
+    height: 100vh;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+    background-color: white;
+    z-index: 1;
+    padding-top: 100px;
+}
+.nameForm{
+    padding: 20px;
+    display: flex;
+    max-width: 300px;
+    align-items: center;
+    flex-direction:column;
+}
+
+/* .ng-pending {
+    border: 1px solid yellow;
+} */

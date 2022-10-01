@@ -1,0 +1,100 @@
+.headerMenu{
+    bottom:0;
+    left: 0;
+    right: 0;
+    position:fixed;
+    background-color: rgb(255, 255, 255);
+    z-index: 1;
+    height: 53px;
+}
+.iconMenu{
+    padding:.25rem;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+   
+}
+.mobileIconButtons{
+    height: 100%;
+    height: 50px;
+}
+.brandIcon{
+    display: none;
+}
+.profileMenu{
+    display: flex;
+    align-self: center;
+}
+
+.largeIcon{
+    font-size: 48px;
+    height: 48px;
+    width: 48px;
+    line-height: 48px;
+}
+.mediumIconButton{
+    font-size: 48px;
+    height: 48px;
+    width: 48px;
+    line-height: 48px;
+}
+.mediumIcon{
+    font-size:32px;
+    height:32px;
+    width:32px;
+    line-height:32px;
+}
+.deskTopMenu{
+    display: none;
+}
+.profileMenu {
+    display: none;
+}
+@media screen and (min-width: 500px) {
+    .headerMenu{
+        bottom:0;
+        left: 0;
+        right:auto;
+        position:fixed;
+        height: 100%;
+        display:flex;
+        align-items: center;
+        flex-direction: column;
+        align-content: flex-end;
+        justify-content: space-between;
+        z-index: 2;
+        width: 68px;
+    }
+    .iconMenu{
+        width: 100%;
+        padding:.25rem;
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top:.25rem ;
+    }
+    .deskTopMenu{
+        padding:.25rem;
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top:.25rem ;
+    }
+   
+    .profileMenu{
+        display: flex;
+        align-self: center;
+    }
+    .brandIcon{
+        margin: 1rem;
+        display:flex;
+        align-items: center;
+    }
+    
+   
+  }
+
+/* expanding the desktop navigation */
+@media screen and (min-width: 900px) {
+    
+}

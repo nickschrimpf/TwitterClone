@@ -1,0 +1,57 @@
+<mat-drawer-container class="mobilenav" autosize>
+    <mat-drawer-content>
+        <div class="header">
+            <span>Account info</span>
+            <button color="primary" (click)="onToggleSidenav()"mat-icon-button >
+                <mat-icon >close</mat-icon>
+            </button>
+        </div>
+        <div class="menu">
+            <div class="account">
+                <div class="account__profile">
+                    <button *ngIf="this.userProfile" routerLink="/{{[this.userProfile.flutterName]}}" (click)="onToggleSidenav()" mat-icon-button>
+                        <img src="{{this.userProfile.profilePhotoURL}}" alt="photo">
+                    </button>
+                    <button mat-icon-button>
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+                <div *ngIf="this.userProfile" class="account__name_handle">
+                    <span><em>{{this.userProfile.displayName}}</em></span>
+                    <span>@{{this.userProfile.flutterName}}</span>
+                </div>
+                <div *ngIf="this.userProfile"class="followers">
+                    <span>following {{this.userProfile.following.length}} </span>
+                    <span> followers {{this.userProfile.followers.length}}</span>
+                </div>
+            </div>
+            <div class="menu_items">
+                <div>
+                     <button mat-icon-button>
+                        <mat-icon>person</mat-icon>
+                        <span>profile</span>
+                    </button>
+                </div>
+               <div>
+                    <button mat-icon-button>
+                        <mat-icon>list</mat-icon>
+                        <span>lists</span>
+                    </button>
+               </div>
+               <div>
+                <button mat-icon-button>
+                    <mat-icon>comment</mat-icon>
+                    <span>topics</span>
+                </button>
+           </div>
+               
+                
+            </div>
+            <button mat-flat-button (click)="onLogOut()">
+                Log out
+            </button>
+        </div>
+        
+
+    </mat-drawer-content>
+</mat-drawer-container>

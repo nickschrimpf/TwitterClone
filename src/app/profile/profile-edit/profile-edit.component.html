@@ -1,0 +1,118 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <div class="banner">
+        
+        <div>
+            <button  type="button" (click)="onBack()" mat-icon-button>
+                <mat-icon>arrow_back</mat-icon>
+            </button>
+        </div>
+    
+        <div class="banner__save">
+            <button [disabled]="profileForm.untouched"  type="submit" mat-raised-button>Save</button>
+        </div>
+    </div>
+    <div class="profileEdit">
+    
+        <input 
+            class="bannerUpLoad" 
+            type="file"
+            id="banner"
+            name="banner"
+            accept="image/png, image/jpeg"
+            #bannerUpLoad
+            (change)="this.onBannerFileSelected($event)"
+            >
+            <input
+            class="bannerUpLoad"
+            type="text"
+            name="bannerPhotoURL"
+            formControlName="bannerPhotoURL">
+        <input
+            class="profileUpLoad"
+            type="file"
+            id="profilePhoto"
+            name="profilePhoto"
+            accept="image/png, image/jpeg"
+            #profileUpLoad
+            (change)="this.onProfileFileSelected($event)"
+            >
+        <input
+            class="profileUpLoad"
+            type="text"
+            name="profilePhotoURL"
+            formControlName="profilePhotoURL">
+
+    
+        <mat-progress-bar *ngIf="this.uploadingBanner" value="{{this.bannerProgress|async}}" mode="determinate" color="primary"></mat-progress-bar>
+        <div [ngStyle]="this.bannerPhotoURL?{'background-image':'url('+this.bannerPhotoURL+')'}:{ 'background-color': 'rgb(207, 217, 222)'}" class="photoBanner">
+            <div  class="photoUploadBtns">
+                <div class="photoUploadBtns__button">
+                    <button type="button" mat-fab (click)="bannerUpLoad.click()">
+                        <mat-icon>photo_camera</mat-icon>
+                    </button>
+                </div>
+                <div *ngIf="this.bannerPhotoURL" class="photoUploadBtns__button">
+                    <button type="button" mat-fab (click)="this.onCancelBannerSelection()">
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        
+      
+        <div class="profilePhotoandEdit" *ngIf="this.userProfile">
+            <div class="profilePhotoandEdit__imageConatiner" [ngStyle]="this.profileFileSelectedURL?{'background-image':'url('+this.profileFileSelectedURL+')'}:{ 'background-image':'url('+this.profilePhotoURL+')'}||{ 'background-color': 'rgb(207, 217, 222)'}">
+                <div class="progressSpinner">
+                    <mat-progress-spinner *ngIf="this.uploadingProfile" value="{{this.profileProgress|async}}" strokeWidth="3" diameter="88" color="accent" mode="indeterminate"></mat-progress-spinner>
+                </div>
+                <div class="profilePhotoandEdit__button">
+                    <button type="button"  *ngIf="!this.profileFileSelected" mat-fab (click)="profileUpLoad.click()">
+                        <mat-icon>photo_camera</mat-icon>
+                    </button>
+                    <button type="button"  *ngIf="this.profileFileSelected" mat-fab (click)="this.onCancelProfileSelection()">
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="profileFields">
+            <mat-form-field appearance="outline">
+                <input
+                    matInput 
+                    type="text"
+                    formControlName="displayName"
+                    placeholder="Name"
+                    >
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <textarea
+                    matInput
+                    type="text"
+                    formControlName="bio"
+                    placeholder="bio"
+                    ></textarea>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <input
+                    matInput 
+                    type="text" 
+                    name="location"
+                    formControlName="location"
+                    placeholder="location" 
+                    id="location">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <input
+                    matInput 
+                    type="url" 
+                    name="website"
+                    placeholder="website"
+                    formControlName="website" 
+                    id="website">
+            </mat-form-field>
+            
+        </div>
+    </div>
+</form>

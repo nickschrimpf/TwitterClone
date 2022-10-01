@@ -1,0 +1,24 @@
+<section class="signup-step">
+    <div class="nameForm">
+    <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
+        
+           
+            <mat-form-field appearance="outline">
+                <mat-label>Flutter Name</mat-label>
+                
+                <input
+                    matInput
+                    type="text"
+                    formControlName="flutterName"
+                    id="flutterName"
+                    >
+                    
+            </mat-form-field>
+            <mat-error *ngIf="flutterName.errors?.['forbiddenName']">Name is already in use</mat-error>
+            <div class="submitButton">
+                <button [disabled]="userProfileForm.invalid" mat-raised-button color="primary">submit</button>
+            </div>
+            
+        </form>
+    </div>  
+</section>

@@ -1,0 +1,60 @@
+.signup__page{
+    position:fixed;
+    top:0;
+    bottom:0;
+    background-color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-left: 32px;
+    padding-right:32px;
+    overflow: hidden;
+    z-index: 1;
+}
+.signup__nav {
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 17px;
+    height: 53px;
+
+}
+.signup__nav_button{
+    display: flex;
+    min-width:56px;
+    min-height: 32px;
+}
+.signup__nav_info{
+    font-weight: 500;
+    height:100%;
+}
+.signup__cta{
+    margin: 20px 0px 20px 0px;
+    line-height: 32px;
+    font-size: 26px;
+}
+.dobInfo{
+    margin-bottom: 4px;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 200;
+    display:flex;
+    flex-direction:column;
+    word-wrap: break-word;
+    white-space:pre-wrap ;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.form__button{
+    display: flex;
+    
+}
+.form__button button{
+    background-color: rgb(15, 20, 25);
+    color: white;
+    border-radius: 9999px;
+    width: 100%;
+}

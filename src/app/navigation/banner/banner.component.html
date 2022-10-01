@@ -1,0 +1,50 @@
+<section class="banner">
+
+    <!-- <div class="banner__welcome" *ngIf="this.route == '/welcome/signup'" >
+
+        <div class="banner__back">
+            <button (click)="onBack()" mat-icon-button>
+                <mat-icon color="primary">close</mat-icon>
+            </button>
+        </div>
+
+        <div class="brandIcon__welcome">
+            <button mat-icon-button (click)="logOut()">
+                <mat-icon color="primary">flutter_dash</mat-icon>
+            </button>
+        </div>
+        <div class="welcome__filler">
+        </div>
+    </div>
+    <div class="banner__welcome" *ngIf="this.route ==  '/welcome/login'" >
+
+        <div class="banner__back">
+            <button (click)="onBack()" mat-icon-button>
+                <mat-icon color="primary">close</mat-icon>
+            </button>
+        </div>
+
+        <div class="brandIcon__welcome">
+            <button mat-icon-button (click)="logOut()">
+                <mat-icon color="primary">flutter_dash</mat-icon>
+            </button>
+        </div>
+        <div class="welcome__filler">
+        </div>
+    </div> -->
+
+
+    <div class="banner__timeline" *ngIf="this.route == '/home/timeline'">
+        <div class="banner_account_button">
+          
+            <button 
+            mat-icon-button 
+            (click)="onToggleSideNav()">
+            <mat-icon>account_circle</mat-icon>
+          </button>
+        </div>
+        <div class="banner_text">
+            <span>Home</span>
+        </div>
+    </div>
+</section>

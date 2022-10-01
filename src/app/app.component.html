@@ -1,11 +1,9 @@
-<div class="main">
-  <div class="now">
-    What is happening now!
-  </div>
-  <div class="timeline">
-    <router-outlet></router-outlet>
-  </div>
-  <div class="profile">
-    your profile
-  </div>
-</div>
+    <div class="main">
+      <router-outlet></router-outlet>
+    <div *ngIf="this.route !== '/welcome'"  class="profile">
+        <p>search!</p>
+        <br>
+       <p>whats happening?</p>
+     </div>
+    </div>
+

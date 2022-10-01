@@ -1,0 +1,54 @@
+<!-- <section>
+    <div *ngIf="this.newSignup">
+        <app-sign-up></app-sign-up>
+    </div>
+</section> -->
+<router-outlet></router-outlet>
+<section class="welcome-page">
+    <div class="welcome-screen">
+        <div class="brandIcon">
+            <mat-icon color="primary">flutter_dash</mat-icon>
+        </div>
+        
+        <div class="heading">
+            <span>Not happening now</span>
+        </div>
+        
+        <div class="signup">
+            <div class="signup__cta">
+                <span>Join Flutter today.</span>
+            </div>
+            <div class="signup__buttons">
+                <div class="signup__button">
+                    <button routerLink="signup" (click)="!this.newSignup" mat-button >Sign up with password and email</button>
+                </div>
+                <div class="signup__button">
+                    <button routerLink="signup" >Sign up with password and email</button>
+                </div>
+                <div class="signup__divider">
+                    <div class="signup__dividerline"><hr></div>
+                    <div>or</div>
+                    <div class="signup__dividerline"><hr></div>
+                </div>
+                <div class="signup__button signup--green">
+                    <button routerLink="signup" mat-button >Sign up with password and email</button>
+                    <div class="signup__conditions">
+                        <span>By signing up, you agree to the Terms of Service and Privacy Policy, including Cookie Use.</span>
+                    </div>   
+                </div>
+            </div>
+        </div>
+        <div class="login">
+            <span class="login__cta">Already have an accout?</span>
+            <div routerLink="login" class="login__button">
+                <button mat-button color="primary">Sign in</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="image">
+        <img src="../../assets/ganapathy-kumar-FQhYGMZ_H_4-unsplash.jpg" alt="">
+    </div>
+</section>
+
+

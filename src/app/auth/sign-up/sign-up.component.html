@@ -1,0 +1,63 @@
+<section class="signup__page">
+    <div class="signup__nav">
+        <div class="signup__nav_button">
+            <button mat-icon-button><mat-icon>close</mat-icon></button>
+        </div>
+        <div class="signup_step">
+            <span>Step 1 of 5</span>
+        </div>
+    </div>
+    <div class="signup__cta">
+        <span>Create your account</span>
+    </div>
+    <form #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm)">
+        <mat-form-field appearance="outline">
+            <input
+                matInput
+                ngModel
+                name="displayName"
+                type="text"
+                placeholder="Name"
+                required
+                maxlength="50">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <input
+                matInput
+                name="email"
+                type="email"
+                placeholder="Email"
+                required
+                ngModel>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <input
+                matInput
+                name="password"
+                type="password"
+                placeholder="please enter a password"
+                required
+                ngModel
+                >
+        </mat-form-field>
+        <div class="dobInfo">
+            <h1>Date of birth</h1>
+            <span>
+                This will not be shown publicly. Confirm your own age, even if this account is for a business, a pet, or something else.
+            </span>
+        </div>
+        <mat-form-field appearance="outline">
+           <mat-label>Date of birth</mat-label>
+           <input
+                matInput
+                ngModel
+                name="dob" 
+                [matDatepicker]="picker">
+           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+           <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <div class="form__button">
+            <button mat-button type="submit">submit</button>
+        </div>
+    </form>
+</section>

@@ -1,0 +1,35 @@
+<section   class="profile">
+    <div [ngStyle]="this.profileUser.bannerPhotoURL?{'background-image':'url('+this.profileUser.bannerPhotoURL+')'}:{ 'background-color': 'rgb(207, 217, 222)'}"  class="photoBanner">
+
+    </div>
+    <div class="profilePhotoandEdit">
+        <div class="profilePhotoandEdit__imageConatiner">
+            <img *ngIf="this.profileUser.profilePhotoURL" src="{{this.profileUser.profilePhotoURL}}" alt="loading...">
+        </div>
+        <div class="profilePhotoandEdit__editBtn">
+            <button (click)="onEdit()" mat-button-flat>Edit profile</button>
+        </div>
+    </div>
+    <div>
+        <div>
+            <span>{{this.profileUser.displayName}}</span>
+        </div>
+        <div>
+            <span>@{{this.profileUser.flutterName}}</span>
+        </div>
+        <div>
+            <span><mat-icon>calendar_month</mat-icon>Joined August 2022 </span>
+        </div>
+        <div *ngIf="this.profileUser.following">
+            <span>{{this.profileUser.following.length}} Following</span>
+            <span>{{this.profileUser.followers.length}} Followers</span>
+        </div>
+    </div>
+    <mat-tab-group class="profileTabs" animationDuration="0s" mat-align-tabs="start">
+        <mat-tab label="Flutters">Flutters</mat-tab>
+        <mat-tab label="Flutters & replies">Flutters & replies</mat-tab>
+        <mat-tab label="Media">Media</mat-tab>
+        <mat-tab label="Likes">Likes</mat-tab>
+      </mat-tab-group>
+
+</section>

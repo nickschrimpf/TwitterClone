@@ -1,0 +1,162 @@
+.lrgTweetForm {
+    display: none;
+}
+
+.tweet_form {
+    position: fixed;
+    z-index: 3;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color:white;  
+}
+.newTweetButton {
+    z-index: 2;
+    position:fixed;
+    bottom:10%;
+    right:20px;
+}
+.completeForm{
+    width: 100%;
+    display: flex;
+}
+.formBody{
+    display:flex;
+    width: 100%;
+    flex-direction: row;
+}
+form{
+    width: 100%;
+}
+.backButton{
+    position:fixed;
+    margin:1rem;
+}
+.tweetButton{
+    display: flex;
+    justify-content: flex-end;
+}
+.tweetButton button {
+    margin:1rem;
+    min-width: 34px;
+    min-height: 34px;
+    border-bottom-left-radius: 9999px;
+    border-bottom-right-radius: 9999px;
+    border-top-left-radius: 9999px;
+    border-top-right-radius:9999px;
+}
+.accountPicture{
+    margin-left:.50rem;
+    margin-right: .50rem;
+    display:flex;
+}
+.accountIcon{
+    font-size: 48px;
+    height: 48px;
+    width: 48px;
+    line-height: 48px;
+}
+
+.visabilitySelector{
+    display:flex;
+    flex-direction: column;
+    width: 100%;
+}
+.visabilitySelectorContainer{
+    display: flex;
+    margin:2px;
+}
+.selector {
+    display: flex;
+    border: 1px solid rgb(207,217,222);
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 9999px;
+}
+.repySelector{
+    display:flex;
+}
+mat-form-field {
+    display:flex;
+    flex-direction: column;
+}
+mat-form-field textarea {
+    border-bottom:none;
+    resize: none;
+    max-height: 96px;
+
+}
+::ng-deep .mat-form-field-underline {
+    display:none;
+}
+mat-spinner{
+    height:24px ;
+}
+
+@media screen and (min-width: 500px) {
+    .newTweetButton{
+        display: none;
+    }
+    .lrgTweetForm{
+        display: flex;
+        margin-top: 65px;
+        margin-bottom: 2px;
+        width: 100%;
+        border:1px  solid rgb(239,243,244);
+    }
+    .lrgTweetForm_group{
+        display: flex;
+        width: 100%;
+    }
+    .tweet_body{
+        display: flex;
+    }
+    mat-form-field textarea {
+        resize: none;
+    }
+    .lrgRepyGroup{
+        display:flex;
+        align-items: center;
+        border-bottom: 2px solid rgb(239,243,244);
+        padding-bottom: 1rem;
+    }
+    .lrgTweeForm__body{
+        display:flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .lrgTweetOptions{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .lrgTweetButton{
+        display: flex;
+    }
+    .lrgTweetButton button {
+        margin:1rem;
+        min-width: 34px;
+        min-height: 34px;
+        border-bottom-left-radius: 9999px;
+        border-bottom-right-radius: 9999px;
+        border-top-left-radius: 9999px;
+        border-top-right-radius:9999px;
+    }
+    .lrgTweetOptions_buttons{
+        display: flex;
+    }
+    .lrgTweetOptions_rightSide{
+        display: flex;
+        align-items: center;
+    }
+    .countSpinner{
+        margin-right: .50rem;
+    }
+    .startThread {
+        border-left: 1px solid rgb(239, 243, 244);
+    }
+
+   
+}

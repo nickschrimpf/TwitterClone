@@ -1,0 +1,40 @@
+<section class="login">
+    <div class="login__body">
+        <div class="login__cta">
+            <span>Sign in to Flutter</span>
+        </div>
+        <form #loginForm="ngForm" (submit)="onSubmit(loginForm)">
+            <mat-form-field appearance="outline">
+                <input
+                    matInput
+                    ngModel
+                    name="email"
+                    type="email"
+                    email
+                    placeholder="Email"
+                    required>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <input
+                    matInput
+                    ngModel
+                    name="password"
+                    type="password"
+                    autocomplete="current-password"
+                    placeholder="Password"
+                    password
+                    required>
+            </mat-form-field>
+            <div class="login__submit">
+                <button mat-button>Submit</button>
+            </div>
+        
+        </form>
+            <div class="login__forgot">
+                <button mat-button>Forgot password?</button>
+            </div>
+        <div class="login__signup">
+            <span>Don't have an account? <a routerLink="/welcome/signup">Sign up</a></span>
+        </div>
+    </div>
+</section>

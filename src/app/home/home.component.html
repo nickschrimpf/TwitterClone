@@ -1,0 +1,20 @@
+<mat-sidenav-container>
+    <mat-sidenav #sidenav role="navigation">
+      <app-side-nav-list (onCloseSidenav)="sidenav.close()"></app-side-nav-list>
+    </mat-sidenav>
+  
+  
+  
+    <mat-sidenav-content>
+      <div *ngIf="this.route !== ':id/edit'"class="header">
+        <app-header  (sidenavToggle)="sidenav.toggle()"></app-header>
+        
+      </div>
+  
+      <div class="main">
+        <app-banner *ngIf="this.route === '/home/timeline'" (sidenavToggle)="sidenav.toggle()"></app-banner>  
+        <router-outlet></router-outlet>
+      </div>
+  
+    </mat-sidenav-content>
+  </mat-sidenav-container>

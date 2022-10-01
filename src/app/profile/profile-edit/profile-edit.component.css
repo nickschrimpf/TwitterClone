@@ -1,0 +1,101 @@
+.banner{
+    position: fixed;
+    top:0;
+    right: 0;
+    left: 0;
+    display:flex;
+    background-color: rgba(255,255,255,.65);
+    backdrop-filter: blur(12px);
+    z-index: 2;
+    height: 50px;
+    scroll-margin-bottom: 1px;
+    align-items: center;
+    justify-content: space-between;
+}
+.banner__save{
+    margin-right: 15px;
+}
+.banner__save button{
+    /* background-color: black;
+    color: white;
+    border-radius: 9999px; */
+    padding-left: 10px;
+    padding-right:10px;
+    font-size: 16px;
+  
+}
+.profileEdit{
+    padding-top: 50px;
+    height: 100vh;
+    width: 100vw;
+}
+.photoBanner{
+    height:125px;
+    width:100vw;
+    display: flex;
+    background-size: cover; 
+}
+.photoBanner img{
+    height:125px;
+    background-size:125px;
+}
+
+.bannerUpLoad{
+    display: none;
+}
+.photoUploadBtns {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 100%;
+   width: 100%;
+}
+.photoUploadBtns button{
+    margin-left: 10px;
+    margin-right:10px;
+    background-color:rgba(15, 20, 25, 0.75);
+    color:white;
+}
+
+.profilePhotoandEdit{
+    display:flex;
+    justify-content: space-between;
+}
+.profilePhotoandEdit__imageConatiner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 81.75px;
+    width: 81.75px;
+    border-radius: 9999px;
+    border: 2px solid white;
+    background-color: white;
+    margin-left: 25px;
+    margin-top: -10%;
+    background-size:79px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.profileUpLoad{
+    display: none;
+}
+
+.profileFields{
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    margin-left:10px;
+    margin-right:10px;
+}
+.profilePhotoandEdit__button button{
+    background-color:rgba(15, 20, 25, 0.75);
+    color:white;
+    z-index: 1;
+}
+.progressSpinner {
+   position: absolute;
+}
+.mat-button-diabled {
+    background-color: grey;
+    color: black;
+}
