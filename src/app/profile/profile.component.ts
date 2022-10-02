@@ -39,7 +39,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
   onEdit(){
     console.log(this.profileUser.flutterName)
-    this.router.navigate([this.profileUser.flutterName+'/editprofile/'])
+    this.router.navigate(['editprofile'],{relativeTo:this.route})
   }
   ngOnDestroy(): void {
    this.routeSub.unsubscribe()
