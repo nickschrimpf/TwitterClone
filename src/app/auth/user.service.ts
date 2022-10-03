@@ -6,12 +6,9 @@ import { Firestore,
   query,
   where,
   addDoc,
-  getDoc,
   doc, 
   CollectionReference,
   DocumentData,
-  docData,
-  getDocs,
   updateDoc,
 } from '@angular/fire/firestore';
 import { Subject  } from 'rxjs';
@@ -27,7 +24,7 @@ import firebase from 'firebase/compat';
 
 export class UserService {
   private user:User;
-   profile:UserProfile
+  profile:UserProfile
   userProfile = new Subject<UserProfile>();
   currentUser = new Subject<User>();
 
@@ -59,20 +56,22 @@ export class UserService {
     console.log(user)
     const firebaseId = user.uid
     const displayName = user.displayName
-    const newUserProfile = {
-      firebaseId:user.uid,
-      followers:[],
-      following:[],
-      flutterName:null,
-      displayName:user.displayName,
-      profilePhotoURL:user.photoURL,
-      bannerPhotoURL:null,
-      bio:null,
-      website:null,
-      dob:dob,
+    const newUserProfile:UserProfile = {
+      firebaseId: user.uid,
+      followers: [],
+      following: [],
+      flutterName: null,
+      displayName: user.displayName,
+      profilePhotoURL: user.photoURL,
+      bannerPhotoURL: null,
+      bio: null,
+      website: null,
+      dob: dob,
+      id: '',
+      location: ''
     }
     addDoc(this.users$, {...newUserProfile}).then(user=> {
-      const createdUserProfile = {
+      const createdUserProfile:UserProfile = {
         id:user.id,
         firebaseId:firebaseId,
         followers:[],
@@ -91,40 +90,19 @@ export class UserService {
     })
   
   }
-  getCurrentUserProfile(id:string){
+  getCurrentUserProfile(uid:string){
+    if(this.profile){
+      const currentUserProfile:UserProfile = this.profile
+     this.userProfile.next(currentUserProfile)
+    }else{
       const user = query(
-        collection(this.firestore,'users'),where('firebaseId','==',id)
+        collection(this.firestore,'users'),where('firebaseId','==',uid)
       )
         collectionData(user,{idField:'id'}).subscribe((data:UserProfile[]) => {
-          console.log(data)
-           this.userProfile.next({
-             firebaseId: data[0]['firebaseId'],
-             followers: data[0]['followers'],
-             flutterName: data[0]['flutterName'],
-             following: data[0]['following'],
-             id:data[0]['id'],
-             displayName: data[0]['displayName'],
-             profilePhotoURL: data[0]['profilePhotoURL'],
-             bannerPhotoURL: data[0]['bannerPhotoURL'],
-             dob: data[0]['dob'],
-             website: data[0]['website'],
-             location:data[0]['location']
-           })
-           this.profile =  {
-            firebaseId: data[0]['firebaseId'],
-            followers: data[0]['followers'],
-            flutterName: data[0]['flutterName'],
-            following: data[0]['following'],
-            id: data[0]['id'],
-            displayName: data[0]['displayName'],
-            profilePhotoURL: data[0]['profilePhotoURL'],
-            bannerPhotoURL: data[0]['bannerPhotoURL'],
-            dob: data[0]['dob'],
-            website: data[0]['website'],
-            location:data[0]['location']
-          }
+           this.userProfile.next({ ...data[0]})
+           this.profile =  {...data[0]}
         })
-    
+    }
   }
 
   getCurrentUser(){
@@ -148,16 +126,6 @@ export class UserService {
     updateDoc(docRef,{'flutterName':name})
     this.router.navigate(['/timeline'])
   }
-
-  // getUserByUID(userId){
-  //   const user = query(
-  //     collection(this.firestore,'users'),where('firebaseId','==',userId)
-  //   )
-  //   return collectionData(user).pipe(map(data => {
-      
-  //     console.log(data)
-  //   }))f
-  // }
 
   getUserProfilebyFN(flutterName:string){
     const userProfile = query(
