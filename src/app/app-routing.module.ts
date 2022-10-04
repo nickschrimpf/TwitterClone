@@ -22,20 +22,13 @@ const routes: Routes = [
       path:'login',component:LoginComponent,
     }
   ]},
+  {path:'home',redirectTo:'/home/timeline',pathMatch:'full'},
   {path:'home',component:HomeComponent, children:[
     {path:'timeline',component:TimelineComponent},
     {path:':id', component:ProfileComponent},
     {path:':id/editprofile', component:ProfileEditComponent},
-     
-    
   ]},
-    {path:'',redirectTo:'/home',pathMatch:'full'}
-  
-  
-  
-  
- 
-
+    {path:'',redirectTo:'/home/timeline',pathMatch:'full'},
 ];
 
 @NgModule({

@@ -1,7 +1,7 @@
-import { Component, DoCheck,  OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+
 import { AuthService } from './auth/auth.service';
-import { Location } from '@angular/common';
+
 
 
 @Component({
@@ -9,18 +9,16 @@ import { Location } from '@angular/common';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit,DoCheck {
+export class AppComponent implements OnInit {
   title = 'twitterClone';
-  route
-  constructor(private auth:AuthService,private router:Router,private location: Location){
+ 
+  constructor(private auth:AuthService){
     
   }
   ngOnInit(){
-    this.route = this.location.path()
+   
     this.auth.initAuthListener()
   }
  
-  ngDoCheck(): void {
-    this.route = this.location.path()
-  }
+ 
 }

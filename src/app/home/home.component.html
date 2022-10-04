@@ -7,13 +7,16 @@
   
     <mat-sidenav-content>
       <div *ngIf="this.route !== ':id/edit'"class="header">
-        <app-header  (sidenavToggle)="sidenav.toggle()"></app-header>
-        
+        <app-header></app-header>
       </div>
-  
       <div class="main">
         <app-banner *ngIf="this.route === '/home/timeline'" (sidenavToggle)="sidenav.toggle()"></app-banner>  
         <router-outlet></router-outlet>
+        <div *ngIf="this.route !== '/welcome'"  class="profile">
+          <p>search!</p>
+          <br>
+         <p>whats happening?</p>
+       </div>
       </div>
   
     </mat-sidenav-content>

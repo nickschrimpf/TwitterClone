@@ -16,9 +16,8 @@
     margin-right: 15px;
 }
 .banner__save button{
-    /* background-color: black;
-    color: white;
-    border-radius: 9999px; */
+
+    border-radius: 9999px; 
     padding-left: 10px;
     padding-right:10px;
     font-size: 16px;

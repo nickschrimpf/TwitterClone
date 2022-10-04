@@ -15,7 +15,6 @@ export class HomeComponent implements OnInit {
   }
   ngOnInit(){
     this.route = this.location.path()
-    this.auth.initAuthListener()
   }
  
   ngDoCheck(): void {
