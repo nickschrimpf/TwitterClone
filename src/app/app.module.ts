@@ -26,6 +26,8 @@ import { SignUpStepComponent } from './auth/sign-up-step/sign-up-step.component'
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
 import { HomeComponent } from './home/home.component';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideStorage,getStorage } from '@angular/fire/storage';
 
 
 
@@ -61,6 +63,8 @@ import { HomeComponent } from './home/home.component';
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule,
+    provideAuth(() => getAuth()),
+    provideStorage(() => getStorage()),
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

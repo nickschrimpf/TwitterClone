@@ -7,6 +7,7 @@ export const environment = {
     projectId: 'twitterclone-51191',
     appId: '1:161611046422:web:4f208fe38963e1b9af1f37',
     storageBucket: 'twitterclone-51191.appspot.com',
+    locationId: 'us-central',
     apiKey: 'AIzaSyCqk264Y9vEDgTJVkBMTcHSau3MAhlUTbc',
     authDomain: 'twitterclone-51191.firebaseapp.com',
     messagingSenderId: '161611046422',
