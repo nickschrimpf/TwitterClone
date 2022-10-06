@@ -10,9 +10,9 @@
             </div>
             <div class="tweet__content">
                 <div class="author_profile">
-                    
-                    <img src="{{tweet.autherPhotoURL}}">
-                    
+                    <div    >
+                        <img routerLink='/home/{{[this.tweet.auther]}}' src="{{tweet.autherPhotoURL}}">
+                    </div>
                 </div>
             
                 <div class="tweet__body">
@@ -45,19 +45,19 @@
         
                     <div class="tweet__actions">
                         <div>
-                            <button mat-icon-button><mat-icon>forum</mat-icon></button>
+                            <button mat-icon-button><mat-icon>chat_bubble_outline</mat-icon></button>
                             <span>{{tweet.replies.length}}</span>
                         </div>
                         <div>
-                            <button mat-icon-button><mat-icon>repeat_on</mat-icon></button>
+                            <button mat-icon-button><mat-icon>repeat_outline</mat-icon></button>
                             <span>{{tweet.retweets.length}}</span>
                         </div>
                         <div>
-                            <button mat-icon-button><mat-icon>favorite</mat-icon></button>
+                            <button mat-icon-button><mat-icon>favorite_outline</mat-icon></button>
                             <span>{{tweet.likes.length}}</span>
                         </div>
                         <div>
-                            <button mat-icon-button><mat-icon>share</mat-icon></button>
+                            <button mat-icon-button><mat-icon>ios_share</mat-icon></button>
                         </div>
                         
                     </div>

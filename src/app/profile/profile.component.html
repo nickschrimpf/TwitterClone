@@ -1,3 +1,14 @@
+<div class="banner">
+    <div>
+        <button  type="button" (click)="onBack()" mat-icon-button>
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+    </div>
+    <div>
+        <span>{{this.profileUser.displayName}}</span>
+    </div>
+</div>
+
 <section   class="profile">
     <div [ngStyle]="this.profileUser.bannerPhotoURL?{'background-image':'url('+this.profileUser.bannerPhotoURL+')'}:{ 'background-color': 'rgb(207, 217, 222)'}"  class="photoBanner">
 
@@ -6,7 +17,7 @@
         <div class="profilePhotoandEdit__imageConatiner">
             <img *ngIf="this.profileUser.profilePhotoURL" src="{{this.profileUser.profilePhotoURL}}" alt="loading...">
         </div>
-        <div class="profilePhotoandEdit__editBtn">
+        <div *ngIf="profileOwner" class="profilePhotoandEdit__editBtn">
             <button (click)="onEdit()" mat-button-flat>Edit profile</button>
         </div>
     </div>

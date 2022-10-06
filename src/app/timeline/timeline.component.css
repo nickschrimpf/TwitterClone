@@ -30,9 +30,9 @@
     align-items: flex-start; 
 }
 .author_profile img{
-   height: 38px;
-   width: 38px;
-     
+    height: 60px;
+    width: 60px;
+    border-radius: 9999px;
 }
 .tweet__content{
     display: flex;
