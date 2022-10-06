@@ -18,7 +18,7 @@ import { AuthService } from './auth/auth.service';
 import { AngularFireModule } from '@angular/fire/compat';
 
 import { LoginComponent } from './auth/login/login.component';
-import { BannerComponent } from './navigation/banner/banner.component';
+
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { SideNavListComponent } from './navigation/side-nav-list/side-nav-list.component';
 import { HeaderComponent } from './navigation/header/header.component';
@@ -42,7 +42,6 @@ import { HomeComponent } from './home/home.component';
     SignUpComponent,
     WelcomeComponent,
     LoginComponent,
-    BannerComponent,
     SideNavListComponent,
     SignUpStepComponent,
     ProfileComponent,

@@ -1,4 +1,4 @@
-import { Component, DoCheck,  OnInit } from '@angular/core';
+import { Component, DoCheck,  EventEmitter,  OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { Location } from '@angular/common';
@@ -20,4 +20,5 @@ export class HomeComponent implements OnInit {
   ngDoCheck(): void {
     this.route = this.location.path()
   }
+
 }
