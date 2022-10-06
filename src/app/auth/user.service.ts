@@ -88,8 +88,8 @@ export class UserService {
       this.userProfile.next(createdUserProfile)
       this.profile = createdUserProfile
     })
-  
   }
+  
   getCurrentUserProfile(uid:string){
     if(this.profile){
       const currentUserProfile:UserProfile = this.profile
