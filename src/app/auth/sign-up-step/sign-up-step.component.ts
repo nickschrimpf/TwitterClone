@@ -20,7 +20,6 @@ export class SignUpStepComponent implements OnInit, Validators {
 
   ngOnInit(): void {
     this.initForm()
-    this.userService.getCurrentUser()
   }
 
   private initForm(){

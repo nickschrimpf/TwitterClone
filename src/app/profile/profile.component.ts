@@ -12,6 +12,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   profileUser
   routeSub:Subscription
   userProfileSub: Subscription;
+  flutterNameSub:Subscription
   userProfile
   profileOwner = false
   constructor(
@@ -27,7 +28,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.routeSub = this.route.params
       .subscribe((params:Params) => {
           const currenUserFlutterName = params['id']
-          this.userServ.getUserProfilebyFN(currenUserFlutterName).subscribe(user => {
+           this.flutterNameSub = this.userServ.getUserProfilebyFN(currenUserFlutterName)
+            .subscribe(user => {
             this.profileUser = user[0]
              this.userProfileSub = this.userServ.userProfile.subscribe(user => {
               this.userProfile = user
@@ -54,7 +56,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.location.back()
   }
   ngOnDestroy(): void {
-    this.userProfileSub.unsubscribe()
+    
     this.routeSub.unsubscribe()
   }
 

@@ -18,19 +18,17 @@ export class NewTweetComponent implements OnInit {
   tweetDraft = ' ';
   characterCounter = 0;
   progressbar:number;
-  user
   userProfile
+  userProfileSub
 
   constructor(private timeline:TimelineService, private userService:UserService) { }
 
   ngOnInit(): void {
-    this.userService.currentUser.subscribe(user => {
-      this.user = user
-    })
-    this.userService.userProfile.subscribe(userProfile => {
+    this.userProfileSub = this.userService.userProfile.subscribe(userProfile => {
       this.userProfile = userProfile
-      console.log(this.userProfile)
     })
+
+
     this.initForm()
 
     this.tweetForm.get('tweet').valueChanges.subscribe(tweet =>{
@@ -44,7 +42,6 @@ export class NewTweetComponent implements OnInit {
 
   private initForm(){
     let tweet = "";
-
     this.tweetForm = new UntypedFormGroup({
       'tweet' : new UntypedFormControl(tweet,Validators.required)
     })
@@ -55,7 +52,7 @@ export class NewTweetComponent implements OnInit {
       tweet:this.tweetForm.value.tweet,
       auther:this.userProfile.flutterName,
       autherId:this.userProfile.id,
-      autherDisplayName:this.user.displayName,
+      autherDisplayName:this.userProfile.displayName,
       autherPhotoURL:this.userProfile.profilePhotoURL,
       replies:[],
       retweets:[],
@@ -69,6 +66,9 @@ export class NewTweetComponent implements OnInit {
 
   toggleNewTweet(){
     this.showNewTweet = !this.showNewTweet
+  }
+  onDestroy(){
+    this.userProfileSub.unsubscribe()
   }
 
 }

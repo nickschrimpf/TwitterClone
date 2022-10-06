@@ -43,7 +43,7 @@ export class UserService {
         displayName:signUpData.displayName,
         
       }).then(() => {
-        this.getCurrentUser()
+        
         this.createUserProfile(user,signUpData.dob)
       }, function(error) {
         console.log("login error happend at update profile "+error)
@@ -105,26 +105,11 @@ export class UserService {
     }
   }
 
-  getCurrentUser(){
-    this.afAuth.currentUser.then(user => {
-      if(user){
-        const newUser:User = {
-          displayName : user.displayName,
-          id:user.uid,
-          email:user.email,
-          photoURL:user.photoURL,
-        }
-        this.currentUser.next(newUser)
-        this.user = newUser
-        this.getCurrentUserProfile(newUser.id)
-      }
-    })
-  }
 
   setFlutterName(name:'string'){
     const docRef = doc(this.firestore,'users',this.profile.id)
     updateDoc(docRef,{'flutterName':name})
-    this.router.navigate(['/timeline'])
+    this.router.navigate(['/home/timeline'])
   }
 
   getUserProfilebyFN(flutterName:string){

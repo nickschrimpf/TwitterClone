@@ -28,6 +28,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   uploadingBanner: boolean = false;
   profileProgress:Observable<Number>;
   uploadingProfile: boolean;
+  flutterNameSub
   constructor(
     private userServ:UserService,
     private route:ActivatedRoute,
@@ -40,7 +41,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.params.subscribe((params:Params) => {
       const currenUserFlutterName = params['id']
-      this.userServ.getUserProfilebyFN(currenUserFlutterName).subscribe(user => {
+      this.flutterNameSub = this.userServ.getUserProfilebyFN(currenUserFlutterName).subscribe(user => {
         this.userProfile = user[0]
         this.profileForm.patchValue(this.userProfile)
         this.profilePhotoURL = this.userProfile.profilePhotoURL
@@ -68,7 +69,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   }
   onSubmit(){
     this.userServ.updateUserProfile({...this.profileForm.value,id:this.userProfile.id})
-    console.log(this.profileForm.value)
+    this.profileForm.reset()
   }
   onBack(){
     this.location.back()
@@ -133,7 +134,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   }
 
  ngOnDestroy(): void {
-  // this.profileSub.unsubscribe()
+  this.flutterNameSub.unsubscribe()
  }
 
 }
