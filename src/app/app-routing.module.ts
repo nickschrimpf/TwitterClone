@@ -7,8 +7,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignUpStepComponent } from './auth/sign-up-step/sign-up-step.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
-import { homedir } from 'os';
 import { HomeComponent } from './home/home.component';
+
 
 const routes: Routes = [
   {path:'welcome',component:WelcomeComponent,children:[

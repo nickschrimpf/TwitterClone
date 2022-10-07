@@ -13,7 +13,7 @@ import { Firestore,
 } from '@angular/fire/firestore';
 import { Subject  } from 'rxjs';
 import { User } from './user.model';
-import { map , first } from 'rxjs/operators';
+import { map , first, exhaustMap, take } from 'rxjs/operators';
 import { UserProfile } from './user-profile.model';
 import { Router } from '@angular/router';
 import firebase from 'firebase/compat';
@@ -23,11 +23,8 @@ import firebase from 'firebase/compat';
 })
 
 export class UserService {
-  private user:User;
   profile:UserProfile
   userProfile = new Subject<UserProfile>();
-  
-
   private users$ : CollectionReference<DocumentData>
   constructor(
     private firestore:Firestore,
@@ -48,6 +45,10 @@ export class UserService {
         // An error happened.
       })
     })
+  }
+
+  doesThisUserOwnThisProfile(id){
+    return this.profile.id === id
   }
 
   createUserProfile(user: firebase.User, dob: any){
@@ -102,12 +103,22 @@ export class UserService {
         })
     
   }
-
+  getLoggedInUserProfile(){
+    return {...this.userProfile}
+  }
 
   setFlutterName(name:'string'){
     const docRef = doc(this.firestore,'users',this.profile.id)
     updateDoc(docRef,{'flutterName':name})
     this.router.navigate(['/home/timeline'])
+  }
+  getUserProfilebyFN2(flutterName:string){
+    const userProfile = query(
+      collection(this.firestore,'users'),where('flutterName','==',flutterName.toLowerCase())
+    )
+    return collectionData(userProfile,{idField:'id'}).subscribe(data => {
+      return data
+    })
   }
 
   getUserProfilebyFN(flutterName:string){
@@ -134,7 +145,6 @@ export class UserService {
   logOut(){
     this.userProfile.next(null);
     this.profile = null;
-    console.log(this.userProfile)
     this.router.navigate(['/welcome'])
   }
 

@@ -27,8 +27,6 @@ export class NewTweetComponent implements OnInit {
     this.userProfileSub = this.userService.userProfile.subscribe(userProfile => {
       this.userProfile = userProfile
     })
-
-
     this.initForm()
 
     this.tweetForm.get('tweet').valueChanges.subscribe(tweet =>{

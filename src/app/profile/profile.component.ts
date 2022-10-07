@@ -1,55 +1,53 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import {  Subscription } from 'rxjs';
 import { UserService } from '../auth/user.service';
 import { Location } from '@angular/common';
+import { UserProfile } from '@angular/fire/auth';
+import { UiService } from '../shared/ui.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit, OnDestroy {
+  loading
   profileUser
   routeSub:Subscription
-  userProfileSub: Subscription;
+  profileUserSub: Subscription;
   flutterNameSub:Subscription
-  userProfile
-  profileOwner = false
+  userProfile:UserProfile = null
+  profileOwner:boolean = false
   constructor(
     private userServ:UserService,
     private route:ActivatedRoute,
     private router:Router,
-    private location:Location
+    private location:Location,
+    private uiServe:UiService
   ) { }
 
   ngOnInit(): void {
-  
-    this.profileUser = this.route.snapshot.params['id']
+    this.loading = true
     this.routeSub = this.route.params
-      .subscribe((params:Params) => {
+      .subscribe(
+        (params:Params) => {
           const currenUserFlutterName = params['id']
-           this.flutterNameSub = this.userServ.getUserProfilebyFN(currenUserFlutterName)
-            .subscribe(user => {
-            this.profileUser = user[0]
-          })
-          this.userProfileSub = this.userServ.userProfile.subscribe(user => {
-            this.userProfile = user
-            if(this.profileUser && this.userProfile){
-              if( this.userProfile.id === this.profileUser.id){
-                this.profileOwner = true;
-              }
-            }
-            }
-          )
-
-        }
-      )
-    
+            this.profileUserSub = this.userServ.getUserProfilebyFN(currenUserFlutterName)
+              .subscribe(user => {
+                this.loading = false
+                this.profileUser = user[0]
+                this.profileOwner = this.userServ.doesThisUserOwnThisProfile(user[0]['id'])
+              }, (error): void => {
+                this.loading = false
+                this.uiServe.showSnackBar('User does not exist',undefined,5000)
+                this.location.back()
+              })
+          
+          
+      })
   }
- 
- 
+
   onEdit(){
-    console.log(this.profileUser.flutterName)
     this.router.navigate(['editprofile'],{relativeTo:this.route})
   }
   onBack(){
@@ -57,8 +55,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.routeSub.unsubscribe()
-    this.flutterNameSub.unsubscribe()
-    this.userProfileSub.unsubscribe()
+    this.profileUserSub.unsubscribe()
   }
 
 }
