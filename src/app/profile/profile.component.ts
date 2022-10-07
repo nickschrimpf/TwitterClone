@@ -31,17 +31,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
            this.flutterNameSub = this.userServ.getUserProfilebyFN(currenUserFlutterName)
             .subscribe(user => {
             this.profileUser = user[0]
-             this.userProfileSub = this.userServ.userProfile.subscribe(user => {
-              this.userProfile = user
-              if(this.profileUser && this.userProfile){
-                if( this.userProfile.id === this.profileUser.id){
-                  this.profileOwner = true;
-                }
-              }
-              }
-            )
           })
-          
+          this.userProfileSub = this.userServ.userProfile.subscribe(user => {
+            this.userProfile = user
+            if(this.profileUser && this.userProfile){
+              if( this.userProfile.id === this.profileUser.id){
+                this.profileOwner = true;
+              }
+            }
+            }
+          )
+
         }
       )
     
@@ -56,8 +56,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.location.back()
   }
   ngOnDestroy(): void {
-    
     this.routeSub.unsubscribe()
+    this.flutterNameSub.unsubscribe()
+    this.userProfileSub.unsubscribe()
   }
 
 }

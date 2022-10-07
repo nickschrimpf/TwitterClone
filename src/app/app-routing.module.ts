@@ -23,7 +23,8 @@ const routes: Routes = [
     }
   ]},
   {path:'home',redirectTo:'/home/timeline',pathMatch:'full'},
-  {path:'home',component:HomeComponent, children:[
+  {path:'home',component:HomeComponent,  
+  children:[
     {path:'timeline',component:TimelineComponent},
     {path:':id', component:ProfileComponent},
     {path:':id/editprofile', component:ProfileEditComponent},

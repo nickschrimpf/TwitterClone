@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { Firestore,
   collectionData, 
   collection, 
@@ -6,7 +6,7 @@ import { Firestore,
   DocumentData, 
 } from '@angular/fire/firestore';
 
-import { Observable } from 'rxjs';
+import { Observable, Subscribable, Subscription } from 'rxjs';
 import { addDoc } from '@firebase/firestore';
 import { Tweet } from './tweet.model'
 import { UserService } from '../auth/user.service';
@@ -17,10 +17,11 @@ import { UserProfile } from '../auth/user-profile.model';
   providedIn: 'root'
 })
 
-export class TimelineService implements OnInit {
+export class TimelineService implements OnInit,OnDestroy {
   today:number = Date.now()
   user:User
-  userProfile:UserProfile
+  userProfile
+  ProfileSub:Subscription
   private timeline$ : CollectionReference<DocumentData>
 
   constructor(private firestore:Firestore, private userServ:UserService) {
@@ -28,10 +29,7 @@ export class TimelineService implements OnInit {
    }
 
    ngOnInit(): void {
-     this.userServ.currentUser.subscribe(user => {
-      this.user = user
-     })
-     this.userServ.userProfile.subscribe(userProfile => {
+     this.ProfileSub = this.userServ.userProfile.subscribe(userProfile => {
       this.userProfile = userProfile
      })
    }
@@ -48,7 +46,9 @@ export class TimelineService implements OnInit {
     }) as Observable<Tweet[]>
   }
   
- 
+ ngOnDestroy(){
+    this.ProfileSub.unsubscribe()
+ }
 
   
 }

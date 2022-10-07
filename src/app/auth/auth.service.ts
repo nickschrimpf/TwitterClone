@@ -13,10 +13,9 @@ import { UserService } from './user.service';
 })
 
 export class AuthService {
-  authChange = new Subject<boolean>()
+
   user = new BehaviorSubject<User>(null)
 
-  isLoggedIn:boolean = false;
   
 
 
@@ -31,12 +30,10 @@ export class AuthService {
     this.afAuth.authState.subscribe(user => {
       if(user){
         this.userService.getCurrentUserProfile(user.uid)
-        this.isLoggedIn = true;
-        this.authChange.next(true);
+        
       }else{
-        this.isLoggedIn = false;
-        this.authChange.next(false);
-        this.userService.currentUser.next(null)
+       
+        this.userService.userProfile.next(null)
         this.router.navigate(['/welcome'])
       }
     })
@@ -44,7 +41,7 @@ export class AuthService {
 
   createNewUser(signUpdata:AuthData){
     this.afAuth.createUserWithEmailAndPassword(signUpdata.email,signUpdata.password).then(result => {  
-       this.isLoggedIn = true;
+       
        this.userService.createProfile(signUpdata)
        this.router.navigate(['/welcome/signupstep'])
     }).catch(error=>{
@@ -56,6 +53,7 @@ export class AuthService {
     console.log(loginData)
     this.afAuth.signInWithEmailAndPassword(loginData.email,loginData.password).then(result => {
       this.router.navigate(['/home/timeline'])
+      console.log(result.user.uid)
       this.userService.getCurrentUserProfile(result.user.uid)
     }).catch(error => {
       this.uiService.showSnackBar(error.message,undefined,7000)
@@ -63,12 +61,9 @@ export class AuthService {
   }
 
   logOut(){
+    this.userService.logOut()
     this.afAuth.signOut();
-    this.isLoggedIn = false;
-    this.userService.currentUser.next(null)
-    this.authChange.next(false);
-    this.router.navigate(['/welcome'])
-    this.user = null
+    
   }
 
 

@@ -26,7 +26,7 @@ export class UserService {
   private user:User;
   profile:UserProfile
   userProfile = new Subject<UserProfile>();
-  currentUser = new Subject<User>();
+  
 
   private users$ : CollectionReference<DocumentData>
   constructor(
@@ -41,9 +41,7 @@ export class UserService {
     this.afAuth.currentUser.then(user => {
       user.updateProfile({
         displayName:signUpData.displayName,
-        
       }).then(() => {
-        
         this.createUserProfile(user,signUpData.dob)
       }, function(error) {
         console.log("login error happend at update profile "+error)
@@ -56,6 +54,7 @@ export class UserService {
     console.log(user)
     const firebaseId = user.uid
     const displayName = user.displayName
+    const memberSince = new Date(user.metadata.creationTime)
     const newUserProfile:UserProfile = {
       firebaseId: user.uid,
       followers: [],
@@ -68,33 +67,32 @@ export class UserService {
       website: null,
       dob: dob,
       id: '',
-      location: ''
+      location: '',
+      memberSince:memberSince
     }
     addDoc(this.users$, {...newUserProfile}).then(user=> {
       const createdUserProfile:UserProfile = {
-        id:user.id,
-        firebaseId:firebaseId,
-        followers:[],
-        following:[],
-        flutterName:null,
+        id: user.id,
+        firebaseId: firebaseId,
+        followers: [],
+        following: [],
+        flutterName: null,
         displayName: displayName,
-        profilePhotoURL:null,
-        bannerPhotoURL:null,
-        bio:null,
-        website:null,
-        dob:dob,
-        location:null,
+        profilePhotoURL: null,
+        bannerPhotoURL: null,
+        bio: null,
+        website: null,
+        dob: dob,
+        location: null,
+        memberSince: memberSince
       }
-      this.userProfile.next(createdUserProfile)
+      this.userProfile.next({...createdUserProfile})
       this.profile = createdUserProfile
     })
   }
-  
+
   getCurrentUserProfile(uid:string){
-    if(this.profile){
-      const currentUserProfile:UserProfile = this.profile
-     this.userProfile.next(currentUserProfile)
-    }else{
+   
       const user = query(
         collection(this.firestore,'users'),where('firebaseId','==',uid)
       )
@@ -102,7 +100,7 @@ export class UserService {
            this.userProfile.next({ ...data[0]})
            this.profile =  {...data[0]}
         })
-    }
+    
   }
 
 
@@ -130,9 +128,14 @@ export class UserService {
   }
 
   updateUserProfile(profile){
-    console.log(profile)
     const userProfileDocRef = doc(this.firestore,`users/${profile.id}`)
     return updateDoc(userProfileDocRef,{...profile})
+  }
+  logOut(){
+    this.userProfile.next(null);
+    this.profile = null;
+    console.log(this.userProfile)
+    this.router.navigate(['/welcome'])
   }
 
 }

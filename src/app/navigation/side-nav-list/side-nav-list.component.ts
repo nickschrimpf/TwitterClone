@@ -3,7 +3,6 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { UserProfile } from 'src/app/auth/user-profile.model';
 
-import { User } from 'src/app/auth/user.model';
 import { UserService } from 'src/app/auth/user.service';
 
 

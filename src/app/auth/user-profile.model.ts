@@ -13,4 +13,5 @@ export interface UserProfile {
     website:string;
     location:string;
     bio:string;
+    memberSince:any;
 }
