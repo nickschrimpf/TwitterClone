@@ -8,7 +8,11 @@
 .profile{
     display:none;
 }
-
+.content {
+    display: flex;
+    flex-direction: column;
+    width:100vw;
+}
 /* Moving from mobile to mid screen */
 @media screen and (min-width: 500px) {
     .main {
@@ -16,6 +20,12 @@
         padding-left: 140px;
         max-width: 600px;
         flex-direction: column;
+    }
+    .content {
+        flex-direction: row;
+    }
+    .header{
+       width: 100%;
     }
   }
 
@@ -27,10 +37,7 @@
         border-left: 1px solid rgb(239,243,244);
         z-index: 1;
     }
-    .main {
-        flex-grow:2;
-        padding-left: 140px;
-        max-width: 600px;
-        flex-direction: column;
-    }
+ 
+
+   
   }

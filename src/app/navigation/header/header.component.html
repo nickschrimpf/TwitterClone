@@ -1,12 +1,17 @@
 <section class="banner">
     <div class="banner__timeline">
-        <div class="banner_account_button">
+        <div *ngIf="this.isLoading">
+            <mat-progress-spinner></mat-progress-spinner>
+        </div>
+        <div *ngIf="!isLoading" class="banner_account_button">
           
             <button 
             mat-icon-button 
             (click)="onToggleSideNav()">
-            <mat-icon>account_circle</mat-icon>
+            
+            <img [src]=this.userProfile.profilePhotoURL>
           </button>
+          
         </div>
         <div class="banner_text">
             <span>Home</span>
@@ -61,9 +66,9 @@
         </div>
         
     </div>
-    <div class="profileMenu">
-        <button mat-icon-button class="mediumIconButton" color="primary">
-            <mat-icon class="mediumIcon" fontIcon="search">account_circle</mat-icon>
+    <div *ngIf="!isLoading" class="deskTopMenu_account_button">
+        <button mat-icon-button>
+          <img [src]=this.userProfile.profilePhotoURL>
         </button>
     </div>
     
