@@ -6,17 +6,17 @@
   
   
     <mat-sidenav-content>
-      <div *ngIf="this.route !== ':id/edit'"class="header">
+      <div class="header">
         <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
       </div>
       <div class="main">
+        <app-new-tweet></app-new-tweet>
         <router-outlet></router-outlet>
-        <div class="profile">
-          <p>search!</p>
-          <br>
-         <p>whats happening?</p>
-       </div>
       </div>
-  
+      <div class="profile">
+        <p>search!</p>
+        <br>
+       <p>whats happening?</p>
+     </div>
     </mat-sidenav-content>
   </mat-sidenav-container>

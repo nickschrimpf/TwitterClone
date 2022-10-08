@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, NgForm, Validators } from '@angular/forms';
 import { UserService } from 'src/app/auth/user.service';
-import { TimelineService } from '../timeline.service';
-// import {ThemePalette} from '@angular/material/core';
-// import {ProgressSpinnerMode} from '@angular/material/progress-spinner';
+import { TimelineService } from '../../timeline/timeline.service';
+
 
 @Component({
   selector: 'app-new-tweet',
@@ -12,6 +11,7 @@ import { TimelineService } from '../timeline.service';
 })
 
 export class NewTweetComponent implements OnInit {
+  isLoading = false;
   showNewTweet = false;
   showTweetGroup = false;
   tweetForm:UntypedFormGroup;
@@ -24,8 +24,10 @@ export class NewTweetComponent implements OnInit {
   constructor(private timeline:TimelineService, private userService:UserService) { }
 
   ngOnInit(): void {
+    this.isLoading = true
     this.userProfileSub = this.userService.userProfile.subscribe(userProfile => {
       this.userProfile = userProfile
+      this.isLoading = false
     })
     this.initForm()
 

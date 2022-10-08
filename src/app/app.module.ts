@@ -6,7 +6,7 @@ import { MaterialModule } from './material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TimelineComponent } from './timeline/timeline.component';
-import { NewTweetComponent } from './timeline/new-tweet/new-tweet.component';
+import { NewTweetComponent } from './home/new-tweet/new-tweet.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';

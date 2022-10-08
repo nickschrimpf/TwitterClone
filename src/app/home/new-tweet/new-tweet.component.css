@@ -46,11 +46,16 @@ form{
     border-top-left-radius: 9999px;
     border-top-right-radius:9999px;
 }
-.accountPicture{
+.accountPicture img{
     margin-left:.50rem;
     margin-right: .50rem;
     display:flex;
+    background-color: white;
+    height: 89px;
+    width: 89px;
+    border-radius: 999px;
 }
+
 .accountIcon{
     font-size: 48px;
     height: 48px;
