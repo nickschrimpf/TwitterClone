@@ -1,4 +1,4 @@
-import { Component, DoCheck, EventEmitter, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
 import { Location } from '@angular/common';
@@ -9,12 +9,12 @@ import { Location } from '@angular/common';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit,DoCheck {
+export class HeaderComponent implements OnInit {
   @Output()  sidenavToggle = new EventEmitter<void>()
   
-  route
-  constructor(private router:Router,private authService:AuthService, private location:Location) { 
-    this.route = this.location.path()
+
+  constructor(private authService:AuthService,) { 
+  
   }
 
   ngOnInit(): void {
@@ -22,9 +22,7 @@ export class HeaderComponent implements OnInit,DoCheck {
   logOut(){
     this.authService.logOut()
   }
-  ngDoCheck(): void {
-    this.route = this.location.path()
-  }
+ 
   onToggleSideNav(){
     this.sidenavToggle.emit()
   }
