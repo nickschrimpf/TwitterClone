@@ -3,6 +3,7 @@
     /* height: 100vh; */
     flex-grow: 1;
     width: 100vw;
+    justify-content: center;
 }
 
 .profile{

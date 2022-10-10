@@ -6,12 +6,11 @@ import { Firestore,
   DocumentData, 
 } from '@angular/fire/firestore';
 
-import { Observable, Subscribable, Subscription } from 'rxjs';
+import { Observable, Subject,  Subscription } from 'rxjs';
 import { addDoc } from '@firebase/firestore';
 import { Tweet } from './tweet.model'
 import { UserService } from '../auth/user.service';
-import { User } from '../auth/user.model';
-import { UserProfile } from '../auth/user-profile.model';
+
 
 @Injectable({
   providedIn: 'root'
@@ -19,31 +18,39 @@ import { UserProfile } from '../auth/user-profile.model';
 
 export class TimelineService implements OnInit,OnDestroy {
   today:number = Date.now()
-  user:User
   userProfile
   ProfileSub:Subscription
+  usersTimeline
   private timeline$ : CollectionReference<DocumentData>
+  posts$: CollectionReference<DocumentData>;
 
   constructor(private firestore:Firestore, private userServ:UserService) {
     this.timeline$ = collection(this.firestore, 'timeline')
    }
 
    ngOnInit(): void {
+    console.log("fired")
      this.ProfileSub = this.userServ.userProfile.subscribe(userProfile => {
+    
       this.userProfile = userProfile
+      this.usersTimeline = this.getTimeline(this.userProfile.id)
+      console.log(this.usersTimeline)
      })
    }
   
   newTweet(tweet:any){
-    return addDoc(this.timeline$, {...tweet,
+    const posts$ = collection(this.firestore,'users/'+tweet.autherId+'/posts')
+    return addDoc(posts$, {...tweet,
       tweetDate:this.today,
     })
   }
 
-  getTimeline(){
-    return collectionData(this.timeline$,{
+  getTimeline(id){
+    const posts$ = collection(this.firestore,'users/'+id+'/posts')
+    return collectionData(posts$,{
       idField:'id',
     }) as Observable<Tweet[]>
+    
   }
   
  ngOnDestroy(){

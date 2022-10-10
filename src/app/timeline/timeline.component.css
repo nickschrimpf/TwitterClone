@@ -1,3 +1,10 @@
+.spinner {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+}
 .banner{
     position: fixed;
     top:0;

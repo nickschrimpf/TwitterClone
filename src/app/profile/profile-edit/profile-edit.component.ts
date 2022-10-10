@@ -17,8 +17,9 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   profileForm:UntypedFormGroup;
   userProfile
   profileSub:Subscription;
+  routeSub:Subscription;
   bannerPhotoURL;
-  
+  editingBanner = false;
   profilePhotoURL;
   profileFile:File;
   profileFileSelected:File;
@@ -39,7 +40,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   
 
   ngOnInit(): void {
-    this.route.params.subscribe((params:Params) => {
+    this.routeSub = this.route.params.subscribe((params:Params) => {
       const currenUserFlutterName = params['id']
       this.flutterNameSub = this.userServ.getUserProfilebyFN(currenUserFlutterName).subscribe(user => {
         this.userProfile = user[0]
@@ -76,6 +77,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   }
 
   onBannerFileSelected(event){
+    this.editingBanner = true
     if(event.target.files[0]){
       this.uploadingBanner = true;
       let bannerFile = event.target.files[0];
@@ -87,6 +89,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
           finalize(() => {
             fileRef.getDownloadURL().subscribe(data => {
               this.profileForm.patchValue({bannerPhotoURL:data})
+              this.editingBanner = false
               this.profileForm.markAsTouched()
               this.bannerPhotoURL = data
               console.log(data)
@@ -135,6 +138,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
 
  ngOnDestroy(): void {
   this.flutterNameSub.unsubscribe()
+  this.routeSub.unsubscribe()
  }
 
 }

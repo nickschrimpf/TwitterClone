@@ -1,6 +1,6 @@
-import { Component, OnInit} from '@angular/core';
-import { Observable } from 'rxjs';
-import { AuthService } from '../auth/auth.service';
+import { Component, OnDestroy, OnInit} from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { UserService } from '../auth/user.service';
 import { TimelineService } from './timeline.service';
 import { Tweet } from './tweet.model';
 
@@ -14,15 +14,26 @@ import { Tweet } from './tweet.model';
 })
 
 
-export class TimelineComponent implements OnInit {
+export class TimelineComponent implements OnInit, OnDestroy {
+  isLoading = false;
   timeline$:Observable<Tweet[]>
   user:string;
-  constructor(private tlService:TimelineService, private auth:AuthService) { }
+  userProfileSub:Subscription
+  constructor(private tlService:TimelineService, private userServ:UserService) { }
 
   ngOnInit(): void {
+    this.isLoading = true
 
-    this.timeline$ = this.tlService.getTimeline()
+    this.userProfileSub = this.userServ.userProfile.subscribe(userProfile => {
+      if(userProfile){
+        this.timeline$ = this.tlService.getTimeline(userProfile.id)
+        this.isLoading = false
+      }
+    })
     
+  }
+  ngOnDestroy(){
+    this.userProfileSub.unsubscribe()
   }
   
 

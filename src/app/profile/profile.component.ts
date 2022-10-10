@@ -34,9 +34,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
           const currenUserFlutterName = params['id']
             this.profileUserSub = this.userServ.getUserProfilebyFN(currenUserFlutterName)
               .subscribe(user => {
-                this.loading = false
-                this.profileUser = user[0]
-                this.profileOwner = this.userServ.doesThisUserOwnThisProfile(user[0]['id'])
+                
+                  this.loading = false
+                  this.profileUser = user[0]
+                  this.profileOwner = this.userServ.doesThisUserOwnThisProfile(user[0]['id'])
+                  
               }, (error): void => {
                 this.loading = false
                 this.uiServe.showSnackBar('User does not exist',undefined,5000)

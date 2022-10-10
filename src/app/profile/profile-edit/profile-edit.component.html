@@ -51,7 +51,7 @@
                         <mat-icon>photo_camera</mat-icon>
                     </button>
                 </div>
-                <div *ngIf="this.bannerPhotoURL" class="photoUploadBtns__button">
+                <div *ngIf="this.editingBanner" class="photoUploadBtns__button">
                     <button type="button" mat-fab (click)="this.onCancelBannerSelection()">
                         <mat-icon>cancel</mat-icon>
                     </button>

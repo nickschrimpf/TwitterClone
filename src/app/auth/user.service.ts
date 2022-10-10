@@ -48,7 +48,11 @@ export class UserService {
   }
 
   doesThisUserOwnThisProfile(id){
-    return this.profile.id === id
+    if(this.profile){
+      return this.profile.id === id
+    }else{
+      return false
+    }
   }
 
   createUserProfile(user: firebase.User, dob: any){
