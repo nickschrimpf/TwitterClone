@@ -22,15 +22,13 @@ export class TimelineComponent implements OnInit, OnDestroy {
   constructor(private tlService:TimelineService, private userServ:UserService) { }
 
   ngOnInit(): void {
-    this.isLoading = true
-
-    this.userProfileSub = this.userServ.userProfile.subscribe(userProfile => {
+      this.isLoading = true
+      this.userProfileSub = this.userServ.userProfile.subscribe(userProfile => {
       if(userProfile){
         this.timeline$ = this.tlService.getTimeline(userProfile.id)
         this.isLoading = false
       }
-    })
-    
+     })
   }
   ngOnDestroy(){
     this.userProfileSub.unsubscribe()
