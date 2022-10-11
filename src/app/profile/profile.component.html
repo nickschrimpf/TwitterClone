@@ -42,7 +42,7 @@
             </div>
         </div>
         <mat-tab-group class="profileTabs" animationDuration="0s" mat-align-tabs="start">
-            <mat-tab label="Flutters">flutters</mat-tab>
+            <mat-tab label="Flutters"><app-profile-posts [profileID]='[this.profileUser.id]'></app-profile-posts></mat-tab>
             <mat-tab label="Flutters & replies">Flutters & replies</mat-tab>
             <mat-tab label="Media">Media</mat-tab>
             <mat-tab label="Likes">Likes</mat-tab>

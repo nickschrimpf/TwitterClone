@@ -29,6 +29,7 @@ import { HomeComponent } from './home/home.component';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { TweetComponent } from './home/tweet/tweet.component';
+import { ProfilePostsComponent } from './profile/profile-posts/profile-posts.component';
 
 
 
@@ -51,7 +52,8 @@ import { TweetComponent } from './home/tweet/tweet.component';
     ProfileComponent,
     ProfileEditComponent,
     HomeComponent,
-    TweetComponent
+    TweetComponent,
+    ProfilePostsComponent
 
   ],
   imports: [

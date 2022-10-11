@@ -1,0 +1,10 @@
+<div class="spinner" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="!isLoading">
+    <div class="timelineContainer">
+        <app-tweet
+        *ngFor="let tweet of tweets | async"
+        [tweet]="tweet">
+        </app-tweet>
+</div>
