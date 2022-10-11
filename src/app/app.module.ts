@@ -28,6 +28,7 @@ import { ProfileEditComponent } from './profile/profile-edit/profile-edit.compon
 import { HomeComponent } from './home/home.component';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideStorage,getStorage } from '@angular/fire/storage';
+import { TweetComponent } from './home/tweet/tweet.component';
 
 
 
@@ -49,7 +50,8 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     SignUpStepComponent,
     ProfileComponent,
     ProfileEditComponent,
-    HomeComponent
+    HomeComponent,
+    TweetComponent
 
   ],
   imports: [

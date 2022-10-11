@@ -1,28 +1,20 @@
 import { Injectable, } from '@angular/core';
-import { Firestore,
-  collectionData, 
-  collection, 
-  CollectionReference,
-  DocumentData, 
-} from '@angular/fire/firestore';
-
-import { Observable, Subscription } from 'rxjs';
+import { Firestore,collection, collectionData} from '@angular/fire/firestore';
 import { addDoc } from '@firebase/firestore';
 import { Tweet } from './tweet.model'
 import { UserService } from '../auth/user.service';
-
+import {  Observable, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class TimelineService  {
-  today:number = Date.now()
-  userProfile
-  ProfileSub:Subscription
-  usersTimeline
-  private timeline$ : CollectionReference<DocumentData>
-  posts$: CollectionReference<DocumentData>;
+  today = Date.now()
+  timeline = new Subject<Tweet[]>()
+  
+  
 
   constructor(private firestore:Firestore, private userServ:UserService) {
    }
@@ -36,14 +28,8 @@ export class TimelineService  {
   }
 
   getTimeline(id){
-    const posts$ = collection(this.firestore,'users/'+id+'/posts')
-    return collectionData(posts$,{
-      idField:'id',
-    }) as Observable<Tweet[]>
-    
+    console.log('fired'+id)
+    const postsCollection = collection(this.firestore,'users/'+id+'/posts')
+      return collectionData(postsCollection,{idField:'id'}) as Observable<Tweet[]>
   }
-  
-
-
-  
 }

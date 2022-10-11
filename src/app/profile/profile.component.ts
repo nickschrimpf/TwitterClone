@@ -39,22 +39,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
                   this.profileUser = user[0]
                   this.profileOwner = this.userServ.doesThisUserOwnThisProfile(user[0]['id'])
                   
-              }, (error): void => {
-                this.loading = false
-                this.uiServe.showSnackBar('User does not exist',undefined,5000)
-                this.location.back()
               })
-          
-          
       })
-  }
-
-  onEdit(){
-    this.router.navigate(['editprofile'],{relativeTo:this.route})
   }
   onBack(){
     this.location.back()
   }
+  onEdit(){
+    this.router.navigate(['editprofile'],{relativeTo:this.route})
+  }
+  
   ngOnDestroy(): void {
     this.routeSub.unsubscribe()
     this.profileUserSub.unsubscribe()

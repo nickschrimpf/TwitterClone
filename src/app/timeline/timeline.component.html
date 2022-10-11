@@ -3,67 +3,8 @@
 </div>
 <div *ngIf="!isLoading">
     <div class="timelineContainer">
-        <div  *ngFor="let tweet of timeline$ | async">
-            <article class="tweet">
-                <div class="tweet__banner">
-                    <span>retweeted by etc...</span>
-                </div>
-                <div class="tweet__content">
-                    <div class="author_profile">
-                        <div    >
-                            <img routerLink='/home/{{[this.tweet.auther]}}' src="{{tweet.autherPhotoURL}}">
-                        </div>
-                    </div>
-                
-                    <div class="tweet__body">
-                        <div class="tweet__author_menu">
-                            <div class="tweet__author">
-                                <div class="tweet__author-name">
-                                    <span id="name">{{tweet.autherDisplayName}}</span>
-                                </div>
-                                <div class="tweet__author-handle">
-                                    <span>{{tweet.auther}}</span>
-                                </div>
-                                <div>
-                                    <span>.</span>
-                                </div>
-                                <div class="tweet__date">
-                                    <span>{{tweet.tweetDate | date :'shortDate'}}</span>
-                                </div>
-                            </div>
-                           
-                            <div>
-                                <button mat-icon-button>
-                                    <mat-icon>more_horiz</mat-icon>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="tweet__content">
-                            <p>{{tweet.tweet}}</p>
-                        </div>
-                        
-            
-                        <div class="tweet__actions">
-                            <div>
-                                <button mat-icon-button><mat-icon>chat_bubble_outline</mat-icon></button>
-                                <span>{{tweet.replies.length}}</span>
-                            </div>
-                            <div>
-                                <button mat-icon-button><mat-icon>repeat_outline</mat-icon></button>
-                                <span>{{tweet.retweets.length}}</span>
-                            </div>
-                            <div>
-                                <button mat-icon-button><mat-icon>favorite_outline</mat-icon></button>
-                                <span>{{tweet.likes.length}}</span>
-                            </div>
-                            <div>
-                                <button mat-icon-button><mat-icon>ios_share</mat-icon></button>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </div>
-    </div>
+        <app-tweet
+        *ngFor="let tweet of tweets | async"
+        [tweet]="tweet">
+        </app-tweet>
 </div>
