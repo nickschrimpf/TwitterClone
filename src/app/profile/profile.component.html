@@ -2,7 +2,7 @@
     <mat-progress-spinner color="primary"></mat-progress-spinner>
 </div>
 
-<div *ngIf="!this.loading">
+<div class="profile" *ngIf="!this.loading">
     <div class="banner">
         <div>
             <button  type="button" routerLink="/home" mat-icon-button>
@@ -14,7 +14,8 @@
         </div>
     </div>
     
-    <section   class="profile">
+    <section   class="profileBanner">
+        
         <div [ngStyle]="this.profileUser.bannerPhotoURL?{'background-image':'url('+this.profileUser.bannerPhotoURL+')'}:{ 'background-color': 'rgb(207, 217, 222)'}"  class="photoBanner">
     
         </div>
@@ -48,6 +49,6 @@
             <mat-tab label="Likes">Likes</mat-tab>
           </mat-tab-group>
     
-    </section>
+        </section>
     
 </div>

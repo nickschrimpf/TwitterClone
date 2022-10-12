@@ -11,9 +11,9 @@ import { Firestore,
   DocumentData,
   updateDoc,
 } from '@angular/fire/firestore';
-import { Subject  } from 'rxjs';
-import { User } from './user.model';
-import { map , first, exhaustMap, take } from 'rxjs/operators';
+import { Observable, Subject  } from 'rxjs';
+
+import { map , first, take } from 'rxjs/operators';
 import { UserProfile } from './user-profile.model';
 import { Router } from '@angular/router';
 import firebase from 'firebase/compat';
@@ -116,20 +116,12 @@ export class UserService {
     updateDoc(docRef,{'flutterName':name})
     this.router.navigate(['/home/timeline'])
   }
-  getUserProfilebyFN2(flutterName:string){
-    const userProfile = query(
-      collection(this.firestore,'users'),where('flutterName','==',flutterName.toLowerCase())
-    )
-    return collectionData(userProfile,{idField:'id'}).subscribe(data => {
-      return data
-    })
-  }
 
   getUserProfilebyFN(flutterName:string){
     const userProfile = query(
       collection(this.firestore,'users'),where('flutterName','==',flutterName.toLowerCase())
     )
-    return collectionData(userProfile,{idField:'id'})
+    return collectionData(userProfile,{idField:'id'}).pipe(take(1)) as Observable<UserProfile>
   }
 
  isFlutterNameUnique(flutterName:any){

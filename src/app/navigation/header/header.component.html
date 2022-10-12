@@ -1,7 +1,7 @@
 <section class="banner">
     <div class="banner__timeline">
-        <div *ngIf="this.isLoading">
-            <mat-progress-spinner></mat-progress-spinner>
+        <div class="spinner" *ngIf="this.isLoading">
+            <mat-spinner diameter="45"></mat-spinner>
         </div>
         <div *ngIf="!isLoading" class="banner_account_button">
           

@@ -19,7 +19,7 @@ export class ProfilePostsComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true
-    this.tweets = this.tlService.getTimeline(this.profileID)
+    this.tweets = this.tlService.getPostsById(this.profileID)
     this.isLoading = false
   }
 }

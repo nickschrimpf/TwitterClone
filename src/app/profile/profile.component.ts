@@ -46,7 +46,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.location.back()
   }
   onEdit(){
-    this.router.navigate(['editprofile'],{relativeTo:this.route})
+    // this.router.navigate(['editprofile'],{relativeTo:this.route})
   }
   
   ngOnDestroy(): void {

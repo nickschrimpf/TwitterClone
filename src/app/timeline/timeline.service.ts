@@ -5,6 +5,7 @@ import { Tweet } from './tweet.model'
 import { UserService } from '../auth/user.service';
 import {  Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { UserProfile } from '../auth/user-profile.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,9 +28,15 @@ export class TimelineService  {
     })
   }
 
-  getTimeline(id){
-    console.log('fired'+id)
+  getPostsById(id){
     const postsCollection = collection(this.firestore,'users/'+id+'/posts')
-      return collectionData(postsCollection,{idField:'id'}) as Observable<Tweet[]>
+     return collectionData(postsCollection,{idField:'id'}) as Observable<Tweet[]>
   }
+  getUsersFollowerPosts(arrayOfIDs:[]){
+    // arrayOfIDs.forEach((element:UserProfile) => {
+    //   const postsCollection = collection(this.firestore,'user/'+element.id+'/posts56')
+
+    // });
+  }
+
 }

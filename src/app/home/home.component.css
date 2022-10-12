@@ -25,9 +25,7 @@
     .content {
         flex-direction: row;
     }
-    .header{
-       width: 100%;
-    }
+   
   }
 
 @media screen and (min-width: 990px) {

@@ -6,10 +6,8 @@
   
   
     <mat-sidenav-content>
-      <div class="header">
-        <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
        
-      </div>
+      
       <div class="content">
           <div class="main">
             <app-new-tweet></app-new-tweet>
@@ -21,6 +19,6 @@
             <p>whats happening?</p>
           </div>
       </div>
-     
+      <app-header (sidenavToggle)="sidenav.toggle()"></app-header>
     </mat-sidenav-content>
   </mat-sidenav-container>
