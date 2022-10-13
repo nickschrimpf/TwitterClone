@@ -9,12 +9,17 @@
                 <mat-icon>arrow_back</mat-icon>
             </button>
         </div>
-        <div>
-            <span>{{this.profileUser.displayName}}</span>
+        <div class="profileHeader">
+            <div class="profileHeader__name">
+                <span>{{this.profileUser.displayName}}</span>
+            </div>
+            <div class="profileHeader__numTweets">
+                <span>{{this.numberOfTweets}} Tweets</span>
+            </div>
         </div>
     </div>
     
-    <section   class="profileBanner">
+    <section class="profileBanner">
         
         <div [ngStyle]="this.profileUser.bannerPhotoURL?{'background-image':'url('+this.profileUser.bannerPhotoURL+')'}:{ 'background-color': 'rgb(207, 217, 222)'}"  class="photoBanner">
     
@@ -27,23 +32,38 @@
                 <button routerLink="/home/{{this.profileUser.flutterName}}/editprofile" mat-button-flat>Edit profile</button>
             </div>
         </div>
-        <div>
-            <div>
+        <div class="profileInfo">
+            <div class="profileInfo__displayName">
                 <span>{{this.profileUser.displayName}}</span>
             </div>
-            <div>
+            <div class="profileInfo__flutterName">
                 <span>@{{this.profileUser.flutterName}}</span>
             </div>
-            <div>
-                <span><mat-icon>calendar_month</mat-icon>Joined {{this.profileUser.memberSince.toDate() | date}}</span>
+            <div *ngIf="this.profileUser.bio" class="profileInfo__bio">
+               
+                <span>{{this.profileUser.bio}}</span>
             </div>
-            <div *ngIf="this.profileUser.following">
+            <div  class="profileInfo__location_memberSince">
+              <div *ngIf="this.profileUser.location" class="location">
+                <mat-icon>place</mat-icon>
+                <span> {{this.profileUser.location}}</span>
+              </div>
+              <div *ngIf="this.profileUser.website" class="website">
+                <mat-icon>link</mat-icon>
+                <span> {{this.profileUser.website}}</span>
+              </div>
+              <div class="memberSince">
+                <mat-icon>calendar_month</mat-icon>
+                <span> Joined {{this.profileUser.memberSince.toDate() | date}}</span>
+              </div>
+            </div>
+            <div class="profileInfo__follow">
                 <span>{{this.profileUser.following.length}} Following</span>
                 <span>{{this.profileUser.followers.length}} Followers</span>
             </div>
         </div>
         <mat-tab-group class="profileTabs" animationDuration="0s" mat-align-tabs="start">
-            <mat-tab label="Flutters"><app-profile-posts [profileID]='[this.profileUser.id]'></app-profile-posts></mat-tab>
+            <mat-tab label="Flutters"><app-profile-posts (numberOfTweets)="onAddNumberOfTweets($event)"  [profileID]='[this.profileUser.id]'></app-profile-posts></mat-tab>
             <mat-tab label="Flutters & replies">Flutters & replies</mat-tab>
             <mat-tab label="Media">Media</mat-tab>
             <mat-tab label="Likes">Likes</mat-tab>

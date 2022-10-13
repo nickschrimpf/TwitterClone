@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { UserService } from 'src/app/auth/user.service';
 import { TimelineService } from 'src/app/timeline/timeline.service';
@@ -11,15 +11,19 @@ import { Tweet } from 'src/app/timeline/tweet.model';
 })
 export class ProfilePostsComponent implements OnInit {
   @Input() profileID
+  @Output() numberOfTweets = new EventEmitter<number>()
   isLoading = false;
-  tweets:Observable<Tweet[]>
+  tweets:Tweet[]
   
   constructor(private tlService:TimelineService, private userServ:UserService) { }
 
 
   ngOnInit(): void {
     this.isLoading = true
-    this.tweets = this.tlService.getPostsById(this.profileID)
+     this.tlService.getPostsById(this.profileID).subscribe(data =>{
+      this.tweets = data 
+      this.numberOfTweets.emit(data.length)
+    })
     this.isLoading = false
   }
 }

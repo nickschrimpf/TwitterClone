@@ -4,6 +4,7 @@ import { AuthService } from '../../auth/auth.service';
 
 import { UserService } from 'src/app/auth/user.service';
 import { UiService } from 'src/app/shared/ui.service';
+import { Subject, Subscription } from 'rxjs';
 
 
 @Component({
@@ -14,6 +15,7 @@ import { UiService } from 'src/app/shared/ui.service';
 export class HeaderComponent implements OnInit{
   @Output()  sidenavToggle = new EventEmitter<void>()
   userProfile
+  userProfileSub:Subscription
   isLoading = false
   route
   constructor(
@@ -26,11 +28,14 @@ export class HeaderComponent implements OnInit{
 
   ngOnInit(): void {
     this.isLoading = true
-    this.userServ.userProfile.subscribe(data => {
+    this.userProfileSub = this.userServ.userProfile.subscribe(data => {
       this.userProfile = data;
       this.isLoading = false;
     })
     
+  }
+  ngOnDestroy(){
+    this.userProfileSub.unsubscribe()
   }
  
 

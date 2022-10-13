@@ -15,6 +15,7 @@ import { UiService } from 'src/app/shared/ui.service';
   styleUrls: ['./profile-edit.component.css']
 })
 export class ProfileEditComponent implements OnInit, OnDestroy {
+  isLoading = false
   profileForm:UntypedFormGroup;
   userProfile
   profileSub:Subscription;
@@ -41,7 +42,9 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   
 
   ngOnInit(): void {
-    this.uiServ.navBarHide()
+    this.isLoading = true
+    this.uiServ.navBannerHide()
+    this.uiServ.navMenuHide()
     this.routeSub = this.route.params.subscribe((params:Params) => {
       const currenUserFlutterName = params['id']
       this.flutterNameSub = this.userServ.getUserProfilebyFN(currenUserFlutterName).subscribe(user => {
@@ -49,6 +52,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
         this.profileForm.patchValue(this.userProfile)
         this.profilePhotoURL = this.userProfile.profilePhotoURL
         this.bannerPhotoURL = this.userProfile.bannerPhotoURL
+        this.isLoading = false
       })
       this.initForm()
    })    
@@ -72,7 +76,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   }
   onSubmit(){
     this.userServ.updateUserProfile({...this.profileForm.value,id:this.userProfile.id})
-    this.profileForm.reset()
+    this.profileForm.untouched
   }
   onBack(){
     this.location.back()
@@ -141,7 +145,8 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
  ngOnDestroy(): void {
   this.flutterNameSub.unsubscribe()
   this.routeSub.unsubscribe()
-  this.uiServ.navVisable = true
+  this.uiServ.navMenuVisable = true
+  this.uiServ.bannerVisable = true
  }
 
 }

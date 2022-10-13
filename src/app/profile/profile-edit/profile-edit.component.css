@@ -86,6 +86,13 @@
     margin-left:10px;
     margin-right:10px;
 }
+.bio mat-form-field{
+    width: 100%;
+}
+.bio textarea{
+   resize: none;
+   height: 96px;
+}
 .profilePhotoandEdit__button button{
     background-color:rgba(15, 20, 25, 0.75);
     color:white;
@@ -94,7 +101,18 @@
 .progressSpinner {
    position: absolute;
 }
-.mat-button-diabled {
-    background-color: grey;
-    color: black;
+.dob{
+    margin-left: 15px;
+    display: flex;
+    justify-content:center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+.spinner{
+    background-color: white;
+    height:100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

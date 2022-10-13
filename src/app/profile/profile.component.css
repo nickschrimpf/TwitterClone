@@ -16,6 +16,14 @@
     scroll-margin-bottom: 1px;
     align-items: center;
 }
+.profileHeader{
+    display: flex;
+    flex-direction: column;
+
+}
+.profileHeader__name{
+    font-weight: 900;
+}
 
 .profile{
     padding-top:50px;
@@ -59,4 +67,55 @@
     min-height: 34px;
     font-weight: 700;
     line-height: 19px;
+}
+.profileInfo{
+    padding-top: 15px;
+    padding-left: 10px;
+    padding-right:10px;
+}
+.profileInfo__bio{
+    padding-top: 16px;
+    padding-bottom: 12px;
+}
+.profileInfo__displayName{
+    font-size: x-large;
+    font-weight: 900;
+    padding-bottom:5px;
+}
+.profileInfo__flutterName{
+    font-size:16px;
+    color:#536471;
+}
+.profileInfo__location_memberSince{
+    font-size: medium;
+    color: #536471;
+    display: flex;
+    align-items: center;
+    padding-bottom: 15px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+.location{
+    display:flex;
+    align-items: center;
+    margin-right: 10px;
+}
+.memberSince{
+    display:flex;
+    align-items: center;
+}
+.website{
+    display: flex;
+    align-items: center;
+}
+.profileInfo__follow{
+    display: flex;
+    justify-content:flex-start;
+    font-size: medium;
+    color: #536471;
+
+}
+.profileInfo__follow span{
+    margin-right: 15px;
+    margin-bottom: 10px;
 }

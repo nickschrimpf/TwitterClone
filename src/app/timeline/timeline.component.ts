@@ -23,7 +23,8 @@ export class TimelineComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.isLoading = true
-    
+ 
+    this.isLoading = false
   }
 
   ngOnDestroy(){

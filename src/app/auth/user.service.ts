@@ -58,7 +58,6 @@ export class UserService {
   }
 
   createUserProfile(user: firebase.User, dob: any){
-    console.log(user)
     const firebaseId = user.uid
     const displayName = user.displayName
     const memberSince = new Date(user.metadata.creationTime)
@@ -105,7 +104,7 @@ export class UserService {
       )
         collectionData(user,{idField:'id'}).subscribe((data:UserProfile[]) => {
            this.userProfile.next({ ...data[0]})
-           this.tlService.getUsersFollowerPosts(data[0]['following'])
+           this.tlService.getUsersFollowerPosts()
            this.profile =  {...data[0]}
         })
     
@@ -142,7 +141,7 @@ export class UserService {
     return updateDoc(userProfileDocRef,{...profile})
   }
   logOut(){
-    this.userProfile.next(null);
+    this.userProfile.complete();
     this.profile = null;
     this.router.navigate(['/welcome'])
   }

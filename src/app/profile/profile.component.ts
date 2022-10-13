@@ -13,11 +13,13 @@ import { UiService } from '../shared/ui.service';
 export class ProfileComponent implements OnInit, OnDestroy {
   loading
   profileUser
+  numberOfTweets
   routeSub:Subscription
   profileUserSub: Subscription;
-  flutterNameSub:Subscription
-  userProfile:UserProfile = null
-  profileOwner:boolean = false
+  flutterNameSub:Subscription;
+  userProfile:UserProfile = null;
+  profileOwner:boolean = false;
+
   constructor(
     private userServ:UserService,
     private route:ActivatedRoute,
@@ -27,6 +29,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    this.uiServe.navBannerHide()
     this.loading = true
     this.routeSub = this.route.params
       .subscribe(
@@ -45,13 +48,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
   onBack(){
     this.location.back()
   }
-  onEdit(){
-    // this.router.navigate(['editprofile'],{relativeTo:this.route})
+  onAddNumberOfTweets(event){
+    this.numberOfTweets = event
   }
   
   ngOnDestroy(): void {
     this.routeSub.unsubscribe()
     this.profileUserSub.unsubscribe()
+    this.uiServe.navMenuVisable = true;
+    this.uiServe.bannerVisable = true;
   }
 
 }

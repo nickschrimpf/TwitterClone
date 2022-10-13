@@ -1,4 +1,8 @@
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+<div class="spinner" *ngIf="this.isLoading">
+    <mat-spinner></mat-spinner>
+</div>
+
+<form *ngIf="!this.isLoading" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
     <div class="banner">
         
         <div>
@@ -86,14 +90,17 @@
                     placeholder="Name"
                     >
             </mat-form-field>
+        <div class="bio">
             <mat-form-field appearance="outline">
                 <textarea
                     matInput
                     type="text"
                     formControlName="bio"
                     placeholder="bio"
+                    maxlength="160"
                     ></textarea>
             </mat-form-field>
+        </div>
             <mat-form-field appearance="outline">
                 <input
                     matInput 
@@ -111,8 +118,12 @@
                     placeholder="website"
                     formControlName="website" 
                     id="website">
-            </mat-form-field>
-            
+            </mat-form-field> 
+        </div>
+        <div *ngIf="this.userProfile" class="dob">
+            <span>date of birth</span>
+            <h1>{{this.userProfile.dob.toDate()| date}}</h1>
         </div>
     </div>
+       
 </form>

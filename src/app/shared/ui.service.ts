@@ -5,14 +5,21 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   providedIn: 'root'
 })
 export class UiService {
-  navVisable:boolean = true
+  navMenuVisable:boolean = true
+  bannerVisable:boolean = true
   constructor(private snackBar:MatSnackBar) { }
 
-  navBarHide(){
-    this.navVisable = false;
+  navMenuHide(){
+    this.navMenuVisable = false;
   }
-  navToggle(){
-    this.navVisable = !this.navVisable
+  navMenuToggle(){
+    this.navMenuVisable = !this.navMenuVisable
+  }
+  navBannerHide(){
+    this.bannerVisable = false;
+  }
+  navBannerToggle(){
+    this.bannerVisable = !this.bannerVisable
   }
 
   showSnackBar(message,action,duration){
