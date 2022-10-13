@@ -1,4 +1,4 @@
-<section class="banner">
+<section *ngIf="this.uiServ.navVisable" class="banner">
     <div class="banner__timeline">
         <div class="spinner" *ngIf="this.isLoading">
             <mat-spinner diameter="45"></mat-spinner>
@@ -19,7 +19,7 @@
     </div>
 </section>
 
-<div class="headerMenu">
+<div *ngIf="this.uiServ.navVisable" class="headerMenu">
     <div class="iconMenu">
         <div class="brandIcon">
             <button class="largeIconButton" mat-icon-button color="primary">

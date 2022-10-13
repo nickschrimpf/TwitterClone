@@ -1,8 +1,9 @@
-import { Component, EventEmitter, OnInit, Output} from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, OnInit, Output,} from '@angular/core';
+
 import { AuthService } from '../../auth/auth.service';
-import { Location } from '@angular/common';
+
 import { UserService } from 'src/app/auth/user.service';
+import { UiService } from 'src/app/shared/ui.service';
 
 
 @Component({
@@ -10,13 +11,17 @@ import { UserService } from 'src/app/auth/user.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit{
   @Output()  sidenavToggle = new EventEmitter<void>()
   userProfile
   isLoading = false
-
-  constructor(private authService:AuthService,private userServ:UserService) { 
-  
+  route
+  constructor(
+    private authService:AuthService,
+    private userServ:UserService,
+    public uiServ:UiService
+    ) { 
+     
   }
 
   ngOnInit(): void {
@@ -25,7 +30,10 @@ export class HeaderComponent implements OnInit {
       this.userProfile = data;
       this.isLoading = false;
     })
+    
   }
+ 
+
 
   logOut(){
     this.authService.logOut()

@@ -17,6 +17,7 @@ import { map , first, take } from 'rxjs/operators';
 import { UserProfile } from './user-profile.model';
 import { Router } from '@angular/router';
 import firebase from 'firebase/compat';
+import { TimelineService } from '../timeline/timeline.service';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,7 @@ export class UserService {
     private firestore:Firestore,
     private afAuth:AngularFireAuth,
     private router:Router,
+    private tlService:TimelineService
     ) { 
     this.users$ = collection(this.firestore,'users')
   }
@@ -103,6 +105,7 @@ export class UserService {
       )
         collectionData(user,{idField:'id'}).subscribe((data:UserProfile[]) => {
            this.userProfile.next({ ...data[0]})
+           this.tlService.getUsersFollowerPosts(data[0]['following'])
            this.profile =  {...data[0]}
         })
     

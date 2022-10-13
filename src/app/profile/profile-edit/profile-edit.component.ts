@@ -6,6 +6,7 @@ import {  Observable, Subscription } from 'rxjs';
 import { UserService } from 'src/app/auth/user.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize, map } from 'rxjs/operators';
+import { UiService } from 'src/app/shared/ui.service';
 
 
 @Component({
@@ -33,13 +34,14 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   constructor(
     private userServ:UserService,
     private route:ActivatedRoute,
-    private router:Router,
     private location:Location,
-    private afstorage:AngularFireStorage
+    private afstorage:AngularFireStorage,
+    public uiServ:UiService
   ) { }
   
 
   ngOnInit(): void {
+    this.uiServ.navBarHide()
     this.routeSub = this.route.params.subscribe((params:Params) => {
       const currenUserFlutterName = params['id']
       this.flutterNameSub = this.userServ.getUserProfilebyFN(currenUserFlutterName).subscribe(user => {
@@ -139,6 +141,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
  ngOnDestroy(): void {
   this.flutterNameSub.unsubscribe()
   this.routeSub.unsubscribe()
+  this.uiServ.navVisable = true
  }
 
 }

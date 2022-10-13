@@ -53,7 +53,6 @@ export class AuthService {
     console.log(loginData)
     this.afAuth.signInWithEmailAndPassword(loginData.email,loginData.password).then(result => {
       this.router.navigate(['/home/timeline'])
-      console.log(result.user.uid)
       this.userService.getCurrentUserProfile(result.user.uid)
     }).catch(error => {
       this.uiService.showSnackBar(error.message,undefined,7000)
