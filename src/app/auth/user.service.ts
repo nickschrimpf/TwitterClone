@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Firestore,
-  collectionData, 
+  collectionData,
   collection,
   query,
   where,
   addDoc,
-  doc, 
+  doc,
   CollectionReference,
   DocumentData,
   updateDoc,
+
 } from '@angular/fire/firestore';
-import { Observable, Subject  } from 'rxjs';
+import { Observable, Subject} from 'rxjs';
 
 import { map , first, take } from 'rxjs/operators';
 import { UserProfile } from './user-profile.model';
@@ -25,14 +27,15 @@ import { TimelineService } from '../timeline/timeline.service';
 
 export class UserService {
   profile:UserProfile
-  userProfile = new Subject<UserProfile>();
+  userProfile = new Subject<UserProfile>()
   private users$ : CollectionReference<DocumentData>
   constructor(
+    private afs:AngularFirestore,
     private firestore:Firestore,
     private afAuth:AngularFireAuth,
     private router:Router,
     private tlService:TimelineService
-    ) { 
+    ) {
     this.users$ = collection(this.firestore,'users')
   }
 
@@ -92,23 +95,24 @@ export class UserService {
         location: null,
         memberSince: memberSince
       }
-      this.userProfile.next({...createdUserProfile})
+      this.userProfile.next({ ...createdUserProfile } )
       this.profile = createdUserProfile
     })
   }
 
   getCurrentUserProfile(uid:string){
-   
+
       const user = query(
         collection(this.firestore,'users'),where('firebaseId','==',uid)
       )
         collectionData(user,{idField:'id'}).subscribe((data:UserProfile[]) => {
            this.userProfile.next({ ...data[0]})
-           this.tlService.getUsersFollowerPosts()
+           this.tlService.getUsersFollowerPosts(data[0].id)
            this.profile =  {...data[0]}
         })
-    
+
   }
+
   getLoggedInUserProfile(){
     return {...this.userProfile}
   }
@@ -141,7 +145,6 @@ export class UserService {
     return updateDoc(userProfileDocRef,{...profile})
   }
   logOut(){
-    this.userProfile.complete();
     this.profile = null;
     this.router.navigate(['/welcome'])
   }

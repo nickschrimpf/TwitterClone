@@ -16,7 +16,7 @@ export class AuthService {
 
   user = new BehaviorSubject<User>(null)
 
-  
+
 
 
   constructor(
@@ -30,18 +30,17 @@ export class AuthService {
     this.afAuth.authState.subscribe(user => {
       if(user){
         this.userService.getCurrentUserProfile(user.uid)
-        
+
       }else{
-       
-        this.userService.userProfile.next(null)
+        this.userService.userProfile.complete()
         this.router.navigate(['/welcome'])
       }
     })
   }
 
   createNewUser(signUpdata:AuthData){
-    this.afAuth.createUserWithEmailAndPassword(signUpdata.email,signUpdata.password).then(result => {  
-       
+    this.afAuth.createUserWithEmailAndPassword(signUpdata.email,signUpdata.password).then(result => {
+
        this.userService.createProfile(signUpdata)
        this.router.navigate(['/welcome/signupstep'])
     }).catch(error=>{
@@ -49,7 +48,7 @@ export class AuthService {
     })
   }
 
-  login(loginData:any){ 
+  login(loginData:any){
     console.log(loginData)
     this.afAuth.signInWithEmailAndPassword(loginData.email,loginData.password).then(result => {
       this.router.navigate(['/home/timeline'])
@@ -62,7 +61,7 @@ export class AuthService {
   logOut(){
     this.userService.logOut()
     this.afAuth.signOut();
-    
+    this.userService.userProfile.complete()
   }
 
 

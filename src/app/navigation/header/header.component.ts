@@ -5,6 +5,8 @@ import { AuthService } from '../../auth/auth.service';
 import { UserService } from 'src/app/auth/user.service';
 import { UiService } from 'src/app/shared/ui.service';
 import { Subject, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { UserProfile } from '@angular/fire/auth';
 
 
 @Component({
@@ -22,28 +24,28 @@ export class HeaderComponent implements OnInit{
     private authService:AuthService,
     private userServ:UserService,
     public uiServ:UiService
-    ) { 
-     
+    ) {
+
   }
 
   ngOnInit(): void {
     this.isLoading = true
-    this.userProfileSub = this.userServ.userProfile.subscribe(data => {
-      this.userProfile = data;
-      this.isLoading = false;
-    })
-    
+     this.userProfileSub = this.userServ.userProfile.subscribe(data => {
+      this.userProfile = data
+      this.isLoading = false
+     })
+
   }
   ngOnDestroy(){
     this.userProfileSub.unsubscribe()
   }
- 
+
 
 
   logOut(){
     this.authService.logOut()
   }
- 
+
   onToggleSideNav(){
     this.sidenavToggle.emit()
   }

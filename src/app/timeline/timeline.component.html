@@ -4,7 +4,7 @@
 <div *ngIf="!isLoading">
     <div class="timelineContainer">
         <app-tweet
-        *ngFor="let tweet of tweets | async"
+        *ngFor="let tweet of tweets"
         [tweet]="tweet">
         </app-tweet>
 </div>

@@ -17,19 +17,24 @@ import { Tweet } from './tweet.model';
 
 export class TimelineComponent implements OnInit, OnDestroy {
   isLoading = false;
-  tweets:Observable<Tweet[]>
-  
-  constructor(private tlService:TimelineService, private userServ:UserService) { }
+  tweets
+  timelineSub
+  constructor(public tlService:TimelineService, private userServ:UserService) { }
 
   ngOnInit(): void {
     this.isLoading = true
- 
-    this.isLoading = false
+    this.timelineSub = this.tlService.timeline$.subscribe(tweets => {
+      this.tweets = tweets
+      console.log(this.tweets)
+      this.isLoading = false
+    })
+
+
   }
 
   ngOnDestroy(){
-    
+    this.timelineSub.unsubscribe()
   }
-  
+
 
 }
