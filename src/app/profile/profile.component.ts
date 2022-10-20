@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   routeSub:Subscription
   profileUserSub: Subscription;
   flutterNameSub:Subscription;
+  isFollowing:boolean = false;
   userProfile:UserProfile = null;
   profileOwner:boolean = false;
 
@@ -37,11 +38,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
           const currenUserFlutterName = params['id']
             this.profileUserSub = this.userServ.getUserProfilebyFN(currenUserFlutterName)
               .subscribe(user => {
-                
-                  this.loading = false
+                console.log(user)
+
                   this.profileUser = user[0]
                   this.profileOwner = this.userServ.doesThisUserOwnThisProfile(user[0]['id'])
-                  
+                  this.isFollowing = this.userServ.doesThisUserFollowthisProfile(user[0]['id'])
+                  console.log('isFollowing '+this.isFollowing)
+                  this.loading = false
+
               })
       })
   }
@@ -49,9 +53,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.location.back()
   }
   onAddNumberOfTweets(event){
-    this.numberOfTweets = event
+    this.numberOfTweets = event;
   }
-  
+  onUnfollow(){
+    this.userServ.unfollowUser(this.profileUser.id,this.profileUser.followers)
+    this.isFollowing = false;
+  }
+  onFollow(){
+    this.userServ.followUser(this.profileUser.id,this.profileUser.followers)
+    this.isFollowing = true;
+  }
+
   ngOnDestroy(): void {
     this.routeSub.unsubscribe()
     this.profileUserSub.unsubscribe()

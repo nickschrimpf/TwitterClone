@@ -18,11 +18,11 @@
             </div>
         </div>
     </div>
-    
+
     <section class="profileBanner">
-        
+
         <div [ngStyle]="this.profileUser.bannerPhotoURL?{'background-image':'url('+this.profileUser.bannerPhotoURL+')'}:{ 'background-color': 'rgb(207, 217, 222)'}"  class="photoBanner">
-    
+
         </div>
         <div class="profilePhotoandEdit">
             <div class="profilePhotoandEdit__imageConatiner">
@@ -31,6 +31,12 @@
             <div *ngIf="profileOwner" class="profilePhotoandEdit__editBtn">
                 <button routerLink="/home/{{this.profileUser.flutterName}}/editprofile" mat-button-flat>Edit profile</button>
             </div>
+            <div *ngIf="!profileOwner && !isFollowing" class="profilePhotoandEdit__editBtn">
+              <button (click)="onFollow()"  mat-button-flat>Follow</button>
+          </div>
+          <div *ngIf="isFollowing" class="profilePhotoandEdit__editBtn">
+            <button (click)="onUnfollow()" mat-button-flat>Unfollow</button>
+        </div>
         </div>
         <div class="profileInfo">
             <div class="profileInfo__displayName">
@@ -40,7 +46,7 @@
                 <span>@{{this.profileUser.flutterName}}</span>
             </div>
             <div *ngIf="this.profileUser.bio" class="profileInfo__bio">
-               
+
                 <span>{{this.profileUser.bio}}</span>
             </div>
             <div  class="profileInfo__location_memberSince">
@@ -68,7 +74,7 @@
             <mat-tab label="Media">Media</mat-tab>
             <mat-tab label="Likes">Likes</mat-tab>
           </mat-tab-group>
-    
+
         </section>
-    
+
 </div>

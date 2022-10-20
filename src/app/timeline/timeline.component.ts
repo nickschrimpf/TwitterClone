@@ -25,7 +25,7 @@ export class TimelineComponent implements OnInit, OnDestroy {
     this.isLoading = true
     this.timelineSub = this.tlService.timeline$.subscribe(tweets => {
       this.tweets = tweets
-      console.log(this.tweets)
+      // console.log(this.tweets)
       this.isLoading = false
     })
 

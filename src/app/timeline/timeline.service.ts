@@ -1,8 +1,8 @@
-import { Injectable, } from '@angular/core';
+import { Injectable, OnDestroy, } from '@angular/core';
 import { Firestore,collection, collectionData,addDoc, getDocs} from '@angular/fire/firestore';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Tweet } from './tweet.model'
-import {  Observable, Subject } from 'rxjs';
+import {  Observable, Subject, Subscription } from 'rxjs';
 import {  map, switchMap} from 'rxjs/operators';
 
 
@@ -14,8 +14,8 @@ import {  map, switchMap} from 'rxjs/operators';
 export class TimelineService  {
   today = Date.now()
   timeline$ = new Subject<Tweet[]>()
-
-
+  followersSub:Subscription
+  postSub:Subscription
 
   constructor(private firestore:Firestore,private afs:AngularFirestore) {}
 
@@ -34,14 +34,14 @@ export class TimelineService  {
 
   getUsersFollowerPosts(id){
     let result = []
-  this.afs.collectionGroup('users',ref => ref.where('followers','array-contains',id)).valueChanges({idField:'id'})
+  this.followersSub = this.afs.collectionGroup('users',ref => ref.where('followers','array-contains',id)).valueChanges({idField:'id'})
     .pipe(map(action => {
-      console.log('action')
-      console.log(action)
+      // console.log('action')
+      // console.log(action)
          action.forEach(doc => {
-         console.log('doc')
-        console.log(doc)
-         this.afs.collection('users/'+doc['id']+'/posts')
+        //  console.log('doc')
+        // console.log(doc)
+         this.postSub = this.afs.collection('users/'+doc['id']+'/posts')
           .snapshotChanges().pipe(map(docArray => {
           // console.log(docArray)
           return docArray.map(doc => {
@@ -62,13 +62,20 @@ export class TimelineService  {
           })
         }))
         .subscribe(data => {
-          console.log(data)
+          // console.log(data)
           result.push(...data)
           this.timeline$.next(result)
         })
       })
     }))
     .subscribe()
+
+  }
+
+  logOut(){
+    this.followersSub.unsubscribe()
+    this.postSub.unsubscribe()
+    this.timeline$.complete()
   }
 
 }

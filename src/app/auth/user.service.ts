@@ -59,7 +59,45 @@ export class UserService {
       return false
     }
   }
+  doesThisUserFollowthisProfile(id){
+    if(this.profile){
+      return this.profile.following.includes(id)
+    }else{
+      return false
+    }
+  }
 
+  unfollowUser(id,follwersArray){
+    const index = follwersArray.indexOf(this.profile.id)
+    if(index > -1){
+      follwersArray.splice(index,1)
+      if(follwersArray.length === 0){
+        this.afs.doc('users/'+id).update({followers:null}).then()
+      }
+      this.afs.doc('users/'+id).update({followers:follwersArray}).then()
+    }
+    const followingIndex = this.profile.following.indexOf(id)
+    if(followingIndex > -1){
+      this.profile.following.splice(followingIndex,1)
+      this.afs.doc('users/'+this.profile.id).update({following:this.profile.following}).then()
+    }
+  }
+  followUser(id,followersArray){
+    const index = followersArray.indexOf(this.profile.id)
+    if(index > -1){
+      this.afs.doc('users/'+id).update({followers:followersArray}).then()
+    }else {
+      followersArray.push(this.profile.id)
+      this.afs.doc('users/'+id).update({followers:followersArray}).then()
+    }
+    if(index > -1){
+      this.afs.doc('users/'+this.profile.id).update({following:this.profile.following}).then()
+    }else {
+      this.profile.following.push(id)
+      this.userProfile.next(this.profile)
+      this.afs.doc('users/'+this.profile.id).update({following:this.profile.following}).then()
+    }
+  }
   createUserProfile(user: firebase.User, dob: any){
     const firebaseId = user.uid
     const displayName = user.displayName
@@ -147,6 +185,7 @@ export class UserService {
   logOut(){
     this.profile = null;
     this.router.navigate(['/welcome'])
+    this.tlService.logOut()
   }
 
 }
