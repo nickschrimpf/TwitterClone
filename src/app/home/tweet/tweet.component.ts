@@ -1,5 +1,7 @@
 import { AfterContentInit, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { UserService } from 'src/app/auth/user.service';
 import { Tweet } from 'src/app/timeline/tweet.model';
+import { TweetService } from './tweet.service';
 
 @Component({
   selector: 'app-tweet',
@@ -9,7 +11,7 @@ import { Tweet } from 'src/app/timeline/tweet.model';
 export class TweetComponent implements OnInit  {
   isLoading = false;
   @Input() tweet:Tweet
-  constructor() { }
+  constructor(private tweetServ:TweetService,public userServ:UserService) { }
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -17,11 +19,12 @@ export class TweetComponent implements OnInit  {
       this.isLoading = false;
     }
   }
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   console.log(this.tweet)
-  // }
-  // ngAfterContentInit(): void {
-  //   console.log(this.tweet)
-  // }
+
+  onTweetLike(tweet){
+    this.tweetServ.onTweetLike(tweet)
+  }
+  onTweetNotLike(tweet){
+    this.tweetServ.onNotLikeTweet(tweet)
+  }
 
 }

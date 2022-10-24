@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit{
   route
   constructor(
     private authService:AuthService,
-    private userServ:UserService,
+    public userServ:UserService,
     public uiServ:UiService
     ) {
 

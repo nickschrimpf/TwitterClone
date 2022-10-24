@@ -13,7 +13,7 @@
                             <img routerLink='/home/{{[tweet.auther]}}' src="{{tweet.autherPhotoURL}}">
                         </div>
                     </div>
-                
+
                     <div class="tweet__body">
                         <div class="tweet__author_menu">
                             <div class="tweet__author">
@@ -30,7 +30,7 @@
                                     <span>{{tweet.tweetDate | date :'shortDate'}}</span>
                                 </div>
                             </div>
-                           
+
                             <div>
                                 <button mat-icon-button>
                                     <mat-icon>more_horiz</mat-icon>
@@ -40,8 +40,8 @@
                         <div class="tweet__content">
                             <p>{{tweet.tweet}}</p>
                         </div>
-                        
-            
+
+
                         <div class="tweet__actions">
                             <div>
                                 <button mat-icon-button><mat-icon>chat_bubble_outline</mat-icon></button>
@@ -51,14 +51,35 @@
                                 <button mat-icon-button><mat-icon>repeat_outline</mat-icon></button>
                                 <span>{{tweet.retweets.length}}</span>
                             </div>
-                            <div>
-                                <button mat-icon-button><mat-icon>favorite_outline</mat-icon></button>
+                            <div *ngIf="!tweet.likes.includes(this.userServ.profile.id)">
+                                <button (click)="onTweetLike(tweet)" mat-icon-button><mat-icon>favorite_outline</mat-icon></button>
                                 <span>{{tweet.likes.length}}</span>
                             </div>
-                            <div>
-                                <button mat-icon-button><mat-icon>ios_share</mat-icon></button>
+                            <div *ngIf="tweet.likes.includes(this.userServ.profile.id)"style="color:red;">
+                              <button (click)="onTweetNotLike(tweet)" mat-icon-button><mat-icon >favorite</mat-icon></button>
+                              <span>{{tweet.likes.length}}</span>
                             </div>
-                            
+                            <div>
+                                <button [matMenuTriggerFor]="shareMenu"  mat-icon-button>
+                                  <mat-icon>ios_share</mat-icon>
+                                </button>
+                                <mat-menu #shareMenu="matMenu">
+                                  <button mat-menu-item>
+                                    <mat-icon>link_outline</mat-icon>
+                                    <span>copy link to tweet</span>
+                                  </button>
+                                  <button mat-menu-item>
+                                    <mat-icon>mail_outline</mat-icon>
+                                    <span> Send via Direct Message</span>
+                                  </button>
+                                  <button mat-menu-item>
+                                    <mat-icon>bookmark_add_outline</mat-icon>
+                                    <span>Bookmark</span>
+                                  </button>
+
+                                </mat-menu>
+                            </div>
+
                         </div>
                     </div>
                 </div>

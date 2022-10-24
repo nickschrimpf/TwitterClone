@@ -26,9 +26,10 @@ import { TimelineService } from '../timeline/timeline.service';
 })
 
 export class UserService {
-  profile:UserProfile
+  public profile:UserProfile
   userProfile = new Subject<UserProfile>()
   private users$ : CollectionReference<DocumentData>
+
   constructor(
     private afs:AngularFirestore,
     private firestore:Firestore,

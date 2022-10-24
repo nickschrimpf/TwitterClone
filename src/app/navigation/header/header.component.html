@@ -4,12 +4,12 @@
             <mat-spinner diameter="45"></mat-spinner>
         </div>
         <div *ngIf="!isLoading" class="banner_account_button">
-            <button 
-            mat-icon-button 
+            <button
+            mat-icon-button
             (click)="onToggleSideNav()">
             <img [src]="this.userProfile.profilePhotoURL">
           </button>
-          
+
         </div>
         <div class="banner_text">
             <span>Home</span>
@@ -44,7 +44,7 @@
                 <mat-icon class="mediumIcon" fontIcon="mail">mail_outline</mat-icon>
             </button>
         </div>
-        
+
         <div class="deskTopMenu">
             <button mat-icon-button class="mediumIconButton" color="primary">
                 <mat-icon class="mediumIcon" fontIcon="bookmark">bookmark</mat-icon>
@@ -62,12 +62,12 @@
                 <mat-icon >history_edu</mat-icon>
             </button>
         </div>
-        
+
     </div>
     <div *ngIf="!isLoading" class="deskTopMenu_account_button">
         <button mat-icon-button>
           <img [src]=this.userProfile.profilePhotoURL>
         </button>
     </div>
-    
-</div>  
+
+</div>
