@@ -1,0 +1,33 @@
+<mat-dialog-content>
+<div mat-dialog-title>
+  <button [mat-dialog-close]="true" mat-icon-button><mat-icon>close</mat-icon></button>
+</div>
+
+  <div class="tweet__content">
+    <div class="author_profile">
+        <div>
+            <img src="{{tweet.autherPhotoURL}}">
+        </div>
+    </div>
+    <div class="tweet__author">
+        <div class="tweet__author-name">
+            <span id="name">{{tweet.autherDisplayName}}</span>
+        </div>
+        <div class="tweet__author-handle">
+            <span>@{{tweet.auther}}</span>
+        </div>
+        <div>
+            <span>.</span>
+        </div>
+        <div class="tweet__date">
+            <span>{{tweet.tweetDate | date :'shortDate'}}</span>
+        </div>
+    </div>
+  </div>
+  <div class="tweet__content">
+      <p>{{tweet.tweet}}</p>
+  </div>
+  </mat-dialog-content>
+
+
+

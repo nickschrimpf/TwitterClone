@@ -12,6 +12,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 
@@ -30,7 +31,8 @@ import {MatMenuModule} from '@angular/material/menu';
         MatTabsModule,
         MatProgressBarModule,
         MatProgressSpinnerModule,
-        MatMenuModule
+        MatMenuModule,
+        MatDialogModule
 
 
     ],
@@ -48,7 +50,8 @@ import {MatMenuModule} from '@angular/material/menu';
         MatTabsModule,
         MatProgressBarModule,
         MatProgressBarModule,
-        MatMenuModule
+        MatMenuModule,
+        MatDialogModule
     ]
 })
 export class MaterialModule {}

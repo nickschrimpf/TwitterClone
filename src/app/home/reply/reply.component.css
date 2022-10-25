@@ -1,0 +1,63 @@
+.retweetDialog{
+  height: 100vh;
+  width: 100vw;
+  height: 100%;
+  width: 100%;
+}
+.author_profile{
+  margin-right: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.author_profile img{
+  height: 45px;
+  width: 45px;
+  border-radius: 9999px;
+}
+.tweet__content{
+  display: flex;
+  flex-direction:row;
+  word-break: break-all;
+}
+.tweet__author{
+  display: flex;
+  flex-direction: row;
+}
+.tweet__author-name{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 700;
+  min-width: 0px;
+  flex-grow: 0;
+}
+.tweet__author-name span{
+  white-space: nowrap;
+}
+.tweet__author-handle{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex-grow: 0;
+
+}
+.tweet__author-handle span{
+  word-wrap: break-all;
+  min-width: 0px;
+}
+.tweet__date{
+  display: flex;
+  min-width: 0px;
+  flex-grow: 2;
+}
+.tweet__date span{
+  overflow:auto;
+  /* white-space: nowrap; */
+}
+
+@media screen and (min-width: 500px) {
+  .retweetDialog{
+    height: 50vh;
+    width: 50vw;
+  }
+}

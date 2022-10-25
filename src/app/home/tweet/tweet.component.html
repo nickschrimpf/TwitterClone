@@ -21,7 +21,7 @@
                                     <span id="name">{{tweet.autherDisplayName}}</span>
                                 </div>
                                 <div class="tweet__author-handle">
-                                    <span>{{tweet.auther}}</span>
+                                    <span>@{{tweet.auther}}</span>
                                 </div>
                                 <div>
                                     <span>.</span>
@@ -44,7 +44,7 @@
 
                         <div class="tweet__actions">
                             <div>
-                                <button mat-icon-button><mat-icon>chat_bubble_outline</mat-icon></button>
+                                <button (click)="onReply(tweet)" mat-icon-button><mat-icon>chat_bubble_outline</mat-icon></button>
                                 <span>{{tweet.replies.length}}</span>
                             </div>
                             <div *ngIf="!tweet.retweets.includes(this.userServ.profile.id)">

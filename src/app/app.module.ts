@@ -30,6 +30,7 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { TweetComponent } from './home/tweet/tweet.component';
 import { ProfilePostsComponent } from './profile/profile-posts/profile-posts.component';
+import { ReplyComponent } from './home/reply/reply.component';
 
 
 
@@ -53,7 +54,8 @@ import { ProfilePostsComponent } from './profile/profile-posts/profile-posts.com
     ProfileEditComponent,
     HomeComponent,
     TweetComponent,
-    ProfilePostsComponent
+    ProfilePostsComponent,
+    ReplyComponent
 
   ],
   imports: [
