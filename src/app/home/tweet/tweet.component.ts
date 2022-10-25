@@ -19,7 +19,10 @@ export class TweetComponent implements OnInit  {
       this.isLoading = false;
     }
   }
-
+  onRetweet(tweet){
+    console.log(tweet)
+    this.tweetServ.onRetweet(tweet)
+  }
   onTweetLike(tweet){
     this.tweetServ.onTweetLike(tweet)
   }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/auth/user.service';
 import { TimelineService } from '../../timeline/timeline.service';
+import { TweetService } from '../tweet/tweet.service';
 
 
 @Component({
@@ -20,8 +21,8 @@ export class NewTweetComponent implements OnInit {
   progressbar:number;
   userProfile
   userProfileSub
-
-  constructor(private timeline:TimelineService, private userService:UserService) { }
+  today = Date.now()
+  constructor(private timeline:TimelineService, private userService:UserService , private tweetServ:TweetService) { }
 
   ngOnInit(): void {
     this.isLoading = true
@@ -48,7 +49,7 @@ export class NewTweetComponent implements OnInit {
   }
 
   onSubmit(){
-    this.timeline.newTweet({
+    this.tweetServ.newTweet({
       tweet:this.tweetForm.value.tweet,
       auther:this.userProfile.flutterName,
       autherId:this.userProfile.id,
@@ -57,6 +58,7 @@ export class NewTweetComponent implements OnInit {
       replies:[],
       retweets:[],
       likes:[],
+      tweetDate:this.today
   })
     this.showNewTweet = false;
     this.showTweetGroup = false;

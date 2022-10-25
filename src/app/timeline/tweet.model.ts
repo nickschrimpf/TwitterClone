@@ -9,4 +9,5 @@ export interface Tweet {
     replies:any[];
     retweets:any[];
     likes:any[];
+    retweetedBy:any[];
 }

@@ -4,8 +4,8 @@
 <div *ngIf="!isLoading">
     <div class="timelineContainer">
             <article class="tweet">
-                <div class="tweet__banner">
-                    <span>retweeted by etc...</span>
+                <div *ngIf="tweet.retweetedBy" class="tweet__banner">
+                    <span style="color:#00796B ;">retweeted by {{tweet.retweetedBy}}</span>
                 </div>
                 <div class="tweet__content">
                     <div class="author_profile">
@@ -47,10 +47,14 @@
                                 <button mat-icon-button><mat-icon>chat_bubble_outline</mat-icon></button>
                                 <span>{{tweet.replies.length}}</span>
                             </div>
-                            <div>
-                                <button mat-icon-button><mat-icon>repeat_outline</mat-icon></button>
+                            <div *ngIf="!tweet.retweets.includes(this.userServ.profile.id)">
+                                <button (click)='onRetweet(tweet)' mat-icon-button><mat-icon>repeat</mat-icon></button>
                                 <span>{{tweet.retweets.length}}</span>
                             </div>
+                            <div *ngIf="tweet.retweets.includes(this.userServ.profile.id)">
+                              <button (click)='onRetweet(tweet)' mat-icon-button><mat-icon>undo</mat-icon></button>
+                              <span>{{tweet.retweets.length}}</span>
+                           </div>
                             <div *ngIf="!tweet.likes.includes(this.userServ.profile.id)">
                                 <button (click)="onTweetLike(tweet)" mat-icon-button><mat-icon>favorite_outline</mat-icon></button>
                                 <span>{{tweet.likes.length}}</span>
@@ -76,10 +80,8 @@
                                     <mat-icon>bookmark_add_outline</mat-icon>
                                     <span>Bookmark</span>
                                   </button>
-
                                 </mat-menu>
                             </div>
-
                         </div>
                     </div>
                 </div>

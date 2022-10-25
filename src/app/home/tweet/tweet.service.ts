@@ -1,13 +1,30 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { UserService } from 'src/app/auth/user.service';
+import { Firestore,collection, collectionData,addDoc, getDocs} from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TweetService {
+  today = Date.now()
+  constructor(public userServ:UserService,private afs:AngularFirestore,private firestore:Firestore,) { }
 
-  constructor(private userServ:UserService,private afs:AngularFirestore) { }
+  newTweet(tweet:any){
+    const posts$ = collection(this.firestore,'users/'+this.userServ.profile.id+'/posts')
+    return addDoc(posts$, {...tweet})
+  }
+
+  onRetweet(tweet){
+    let retweets = tweet.retweets
+    retweets.push(this.userServ.profile.id)
+    console.log(retweets)
+
+    this.afs.doc('users/'+tweet.autherId+'/posts/'+tweet.id).update({retweets:retweets})
+    const posts = collection(this.firestore,'users/'+this.userServ.profile.id+'/posts')
+    addDoc(posts,{...tweet,retweetedBy:this.userServ.profile.flutterName})
+  }
+
 
   onTweetLike(tweet){
     const index = tweet.likes.indexOf(this.userServ.profile.id)
