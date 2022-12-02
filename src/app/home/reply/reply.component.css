@@ -1,28 +1,58 @@
-.retweetDialog{
+mat-dialog-content{
   height: 100vh;
-  width: 100vw;
-  height: 100%;
-  width: 100%;
+  max-height: 100vh;
+  max-width: 95vw;
+}
+.retweetDialog{
+  position: fixed;
+  top:0;
+  bottom:0;
+  left: 0;
+  right: 0;
+  overflow-x:none;
+  overflow-y:none;
 }
 .author_profile{
   margin-right: 12px;
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+  flex-direction:column;
+  align-items:center;
 }
 .author_profile img{
-  height: 45px;
-  width: 45px;
+  height: 48px;
+  width: 48px;
   border-radius: 9999px;
+  margin-bottom: 4px;
+  margin-top:4px;
 }
 .tweet__content{
   display: flex;
   flex-direction:row;
   word-break: break-all;
 }
+.tweet__actions{
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+}
+.tweet__body{
+  display:flex;
+  margin-right: .5rem;
+  word-break: break-all;
+  hyphens: auto;
+  flex-direction: column;
+  hyphenate-character:auto;
+  width: 100%;
+}
+.tweet__author_menu{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .tweet__author{
   display: flex;
   flex-direction: row;
+
 }
 .tweet__author-name{
   overflow: hidden;
@@ -54,10 +84,30 @@
   overflow:auto;
   /* white-space: nowrap; */
 }
+.tweet {
+  padding: .25rem;
+}
 
-@media screen and (min-width: 500px) {
-  .retweetDialog{
-    height: 50vh;
-    width: 50vw;
-  }
+.retweet__line{
+  display: flex;
+  background-color: grey;
+  width: 2px;
+  height: 50px;
+}
+.reply{
+  margin-bottom: 15px;
+}
+.retweet textarea{
+  border:none;
+  outline:none;
+  resize:none;
+  width:100%;
+  height:125px;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 400;
+}
+.reTweetOptions_buttons{
+  display: flex;
+
 }

@@ -8,6 +8,8 @@ import { SignUpStepComponent } from './auth/sign-up-step/sign-up-step.component'
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
 import { HomeComponent } from './home/home.component';
+import { TweetDetailComponent } from './home/tweet/tweet-detail/tweet-detail.component';
+import { EditGuardService } from './shared/edit-guard.service';
 
 
 const routes: Routes = [
@@ -23,12 +25,15 @@ const routes: Routes = [
     }
   ]},
   {path:'home',redirectTo:'/home/timeline',pathMatch:'full'},
-  {path:'home',component:HomeComponent,  
+  {path:'home',component:HomeComponent,
   children:[
     {path:'timeline',component:TimelineComponent},
-    {path:':id', component:ProfileComponent},
-    {path:':id/editprofile', component:ProfileEditComponent},
   ]},
+    {path:':id', component:ProfileComponent,canActivateChild:[EditGuardService],children:[
+      {path:'editprofile', component:ProfileEditComponent},
+    ]},
+    // {path:':id/editprofile', component:ProfileEditComponent,canActivate:[EditGuardService]},
+    {path:':id/status/:tweetid',component:TweetDetailComponent},
     {path:'',redirectTo:'/home/timeline',pathMatch:'full'},
 ];
 

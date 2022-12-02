@@ -4,6 +4,7 @@ import { Tweet } from 'src/app/timeline/tweet.model';
 import { TweetService } from './tweet.service';
 import { MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { ReplyComponent } from '../reply/reply.component';
+import { profile } from 'console';
 
 @Component({
   selector: 'app-tweet',
@@ -12,18 +13,22 @@ import { ReplyComponent } from '../reply/reply.component';
 })
 export class TweetComponent implements OnInit  {
   isLoading = false;
-  @Input() tweet:Tweet
-  constructor(private tweetServ:TweetService,public userServ:UserService,public dialog:MatDialog) { }
+  userProfile
+  @Input() tweet:Tweet;
+  constructor(private tweetServ:TweetService,private userServ:UserService,public dialog:MatDialog) { }
 
   ngOnInit(): void {
     this.isLoading = true;
-    if(this.tweet){
-      this.isLoading = false;
-    }
+    this.userServ.userProfile.subscribe(data => {
+        this.userProfile = data
+        if(this.tweet != null && this.userProfile != null){
+          this.isLoading = false;
+        }
+    })
+
   }
 
   onReply(tweet){
-    console.log(tweet)
    const replyDialog = this.dialog.open(ReplyComponent, {
       maxHeight:'100vh',
       maxWidth:'100vw',

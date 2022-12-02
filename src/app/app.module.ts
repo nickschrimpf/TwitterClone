@@ -31,6 +31,8 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 import { TweetComponent } from './home/tweet/tweet.component';
 import { ProfilePostsComponent } from './profile/profile-posts/profile-posts.component';
 import { ReplyComponent } from './home/reply/reply.component';
+import { TweetDetailComponent } from './home/tweet/tweet-detail/tweet-detail.component';
+import { EditGuardService } from './shared/edit-guard.service';
 
 
 
@@ -55,7 +57,8 @@ import { ReplyComponent } from './home/reply/reply.component';
     HomeComponent,
     TweetComponent,
     ProfilePostsComponent,
-    ReplyComponent
+    ReplyComponent,
+    TweetDetailComponent
 
   ],
   imports: [
@@ -73,7 +76,7 @@ import { ReplyComponent } from './home/reply/reply.component';
     provideAuth(() => getAuth()),
     provideStorage(() => getStorage()),
   ],
-  providers: [AuthService],
+  providers: [AuthService,EditGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

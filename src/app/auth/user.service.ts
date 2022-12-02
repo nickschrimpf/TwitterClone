@@ -10,12 +10,11 @@ import { Firestore,
   doc,
   CollectionReference,
   DocumentData,
-  updateDoc,
-
+  updateDoc
 } from '@angular/fire/firestore';
-import { Observable, Subject} from 'rxjs';
+import { BehaviorSubject, Observable} from 'rxjs';
 
-import { map , first, take } from 'rxjs/operators';
+import { map , first, take, catchError } from 'rxjs/operators';
 import { UserProfile } from './user-profile.model';
 import { Router } from '@angular/router';
 import firebase from 'firebase/compat';
@@ -27,7 +26,7 @@ import { TimelineService } from '../timeline/timeline.service';
 
 export class UserService {
   public profile:UserProfile
-  userProfile = new Subject<UserProfile>()
+  userProfile = new BehaviorSubject<UserProfile>(null)
   private users$ : CollectionReference<DocumentData>
 
   constructor(
@@ -118,7 +117,7 @@ export class UserService {
       location: '',
       memberSince:memberSince
     }
-    addDoc(this.users$, {...newUserProfile}).then(user=> {
+    addDoc(this.users$, newUserProfile).then(user=> {
       const createdUserProfile:UserProfile = {
         id: user.id,
         firebaseId: firebaseId,
@@ -134,22 +133,21 @@ export class UserService {
         location: null,
         memberSince: memberSince
       }
-      this.userProfile.next({ ...createdUserProfile } )
+      this.userProfile.next(createdUserProfile)
       this.profile = createdUserProfile
     })
   }
 
-  getCurrentUserProfile(uid:string){
-
+  setCurrentUserProfile(uid:string){
       const user = query(
         collection(this.firestore,'users'),where('firebaseId','==',uid)
       )
-        collectionData(user,{idField:'id'}).subscribe((data:UserProfile[]) => {
-           this.userProfile.next({ ...data[0]})
-           this.tlService.getUsersFollowerPosts(data[0].id)
+      collectionData(user,{idField:'id'}).subscribe((data:UserProfile[]) => {
+          console.log(data[0])
+           this.userProfile.next(data[0])
+           this.tlService.getUsersFollowingPosts(data[0].following)
            this.profile =  {...data[0]}
         })
-
   }
 
   getLoggedInUserProfile(){
@@ -183,6 +181,7 @@ export class UserService {
     const userProfileDocRef = doc(this.firestore,`users/${profile.id}`)
     return updateDoc(userProfileDocRef,{...profile})
   }
+
   logOut(){
     this.profile = null;
     this.router.navigate(['/welcome'])

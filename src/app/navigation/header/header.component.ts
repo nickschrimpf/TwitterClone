@@ -4,9 +4,8 @@ import { AuthService } from '../../auth/auth.service';
 
 import { UserService } from 'src/app/auth/user.service';
 import { UiService } from 'src/app/shared/ui.service';
-import { Subject, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { UserProfile } from '@angular/fire/auth';
+import { Subscription } from 'rxjs';
+
 
 
 @Component({
@@ -18,7 +17,7 @@ export class HeaderComponent implements OnInit{
   @Output()  sidenavToggle = new EventEmitter<void>()
   userProfile
   userProfileSub:Subscription
-  isLoading = false
+
   route
   constructor(
     private authService:AuthService,
@@ -27,27 +26,23 @@ export class HeaderComponent implements OnInit{
     ) {
 
   }
-
   ngOnInit(): void {
-    this.isLoading = true
-     this.userProfileSub = this.userServ.userProfile.subscribe(data => {
-      this.userProfile = data
-      this.isLoading = false
-     })
 
+     this.userProfileSub = this.userServ.userProfile.subscribe(data => {
+      console.log(data)
+          this.userProfile = data;
+
+     })
   }
   ngOnDestroy(){
-    this.userProfileSub.unsubscribe()
+    this.userProfileSub.unsubscribe();
   }
-
-
-
   logOut(){
-    this.authService.logOut()
+    this.authService.logOut();
   }
 
   onToggleSideNav(){
-    this.sidenavToggle.emit()
+    this.sidenavToggle.emit();
   }
 
 }

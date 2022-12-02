@@ -1,9 +1,9 @@
 <section *ngIf="this.uiServ.bannerVisable" class="banner">
     <div class="banner__timeline">
-        <div class="spinner" *ngIf="this.isLoading">
+        <div class="spinner" *ngIf="!this.userProfile">
             <mat-spinner diameter="45"></mat-spinner>
         </div>
-        <div *ngIf="!isLoading" class="banner_account_button">
+        <div *ngIf="this.userProfile" class="banner_account_button">
             <button
             mat-icon-button
             (click)="onToggleSideNav()">
@@ -64,7 +64,7 @@
         </div>
 
     </div>
-    <div *ngIf="!isLoading" class="deskTopMenu_account_button">
+    <div *ngIf="this.userProfile" class="deskTopMenu_account_button">
         <button mat-icon-button>
           <img [src]=this.userProfile.profilePhotoURL>
         </button>

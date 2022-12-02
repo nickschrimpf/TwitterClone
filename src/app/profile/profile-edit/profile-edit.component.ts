@@ -32,6 +32,8 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   profileProgress:Observable<Number>;
   uploadingProfile: boolean;
   flutterNameSub
+
+
   constructor(
     private userServ:UserService,
     private route:ActivatedRoute,
@@ -39,7 +41,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     private afstorage:AngularFireStorage,
     public uiServ:UiService
   ) { }
-  
+
 
   ngOnInit(): void {
     this.isLoading = true
@@ -55,7 +57,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
         this.isLoading = false
       })
       this.initForm()
-   })    
+   })
   }
   private initForm(){
     let bannerPhotoURL = ''
@@ -64,7 +66,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     let bio = '';
     let location = '';
     let website = '';
-    
+
     this.profileForm = new UntypedFormGroup({
       'displayName':new UntypedFormControl(profileName),
       'bio':new UntypedFormControl(bio),
@@ -76,7 +78,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   }
   onSubmit(){
     this.userServ.updateUserProfile({...this.profileForm.value,id:this.userProfile.id})
-    this.profileForm.untouched
+
   }
   onBack(){
     this.location.back()
@@ -100,17 +102,17 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
               this.bannerPhotoURL = data
               console.log(data)
               this.uploadingBanner = false;
-            })  
+            })
           })
         ).subscribe(), error => {
           console.log(error)
         }
-   
+
      }
   }
 
   onCancelBannerSelection(){
-    
+
     this.bannerPhotoURL = '';
   }
 
@@ -130,9 +132,10 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
               this.profilePhotoURL = data
               this.uploadingProfile = false;
             })
-            
+
           })
-        ).subscribe(), error => {
+        ).subscribe(),
+         error => {
           console.log(error)
         }
      }

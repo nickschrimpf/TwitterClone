@@ -3,14 +3,14 @@
 </div>
 <div *ngIf="!isLoading">
     <div class="timelineContainer">
-            <article class="tweet">
+            <article class="tweet" routerLink='/{{tweet.postOwner}}/status/{{[tweet.id]}}'>
                 <div *ngIf="tweet.retweetedBy" class="tweet__banner">
                     <span style="color:#00796B ;">retweeted by {{tweet.retweetedBy}}</span>
                 </div>
                 <div class="tweet__content">
                     <div class="author_profile">
                         <div>
-                            <img routerLink='/home/{{[tweet.auther]}}' src="{{tweet.autherPhotoURL}}">
+                            <img routerLink='/{{[tweet.postOwner]}}' src="{{tweet.ownerPhotoURL}}">
                         </div>
                     </div>
 
@@ -18,10 +18,10 @@
                         <div class="tweet__author_menu">
                             <div class="tweet__author">
                                 <div class="tweet__author-name">
-                                    <span id="name">{{tweet.autherDisplayName}}</span>
+                                    <span id="name">{{tweet.ownerUniqueName}}</span>
                                 </div>
                                 <div class="tweet__author-handle">
-                                    <span>@{{tweet.auther}}</span>
+                                    <span>@{{tweet.postOwner}}</span>
                                 </div>
                                 <div>
                                     <span>.</span>
@@ -47,20 +47,20 @@
                                 <button (click)="onReply(tweet)" mat-icon-button><mat-icon>chat_bubble_outline</mat-icon></button>
                                 <span>{{tweet.replies.length}}</span>
                             </div>
-                            <div *ngIf="!tweet.retweets.includes(this.userServ.profile.id)">
+                            <div *ngIf="!tweet.retweets.includes(this.userProfile.id)">
                                 <button (click)='onRetweet(tweet)' mat-icon-button><mat-icon>repeat</mat-icon></button>
                                 <span>{{tweet.retweets.length}}</span>
                             </div>
-                            <div *ngIf="tweet.retweets.includes(this.userServ.profile.id)">
+                            <div *ngIf="tweet.retweets.includes(this.userProfile.id)">
                               <button (click)='onRetweet(tweet)' mat-icon-button><mat-icon>undo</mat-icon></button>
                               <span>{{tweet.retweets.length}}</span>
                            </div>
-                            <div *ngIf="!tweet.likes.includes(this.userServ.profile.id)">
+                            <div *ngIf="!tweet.likes.includes(this.userProfile.id)">
                                 <button (click)="onTweetLike(tweet)" mat-icon-button><mat-icon>favorite_outline</mat-icon></button>
                                 <span>{{tweet.likes.length}}</span>
                             </div>
-                            <div *ngIf="tweet.likes.includes(this.userServ.profile.id)"style="color:red;">
-                              <button (click)="onTweetNotLike(tweet)" mat-icon-button><mat-icon >favorite</mat-icon></button>
+                            <div *ngIf="tweet.likes.includes(this.userProfile.id)"style="color:red;">
+                              <button (click)="onTweetNotLike(tweet)" mat-icon-button><mat-icon>favorite</mat-icon></button>
                               <span>{{tweet.likes.length}}</span>
                             </div>
                             <div>

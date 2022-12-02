@@ -29,7 +29,7 @@
                 <img *ngIf="this.profileUser.profilePhotoURL" src="{{this.profileUser.profilePhotoURL}}" alt="loading...">
             </div>
             <div *ngIf="profileOwner" class="profilePhotoandEdit__editBtn">
-                <button routerLink="/home/{{this.profileUser.flutterName}}/editprofile" mat-button-flat>Edit profile</button>
+                <button routerLink="editprofile" mat-button-flat>Edit profile</button>
             </div>
             <div *ngIf="!profileOwner && !isFollowing" class="profilePhotoandEdit__editBtn">
               <button (click)="onFollow()"  mat-button-flat>Follow</button>
@@ -69,7 +69,10 @@
             </div>
         </div>
         <mat-tab-group class="profileTabs" animationDuration="0s" mat-align-tabs="start">
-            <mat-tab label="Flutters"><app-profile-posts (numberOfTweets)="onAddNumberOfTweets($event)"  [profileID]='[this.profileUser.id]'></app-profile-posts></mat-tab>
+            <mat-tab label="Flutters">
+              <app-profile-posts (numberOfTweets)="onAddNumberOfTweets($event)"  [profileID]='[this.profileUser.id]'>
+              </app-profile-posts>
+            </mat-tab>
             <mat-tab label="Flutters & replies">Flutters & replies</mat-tab>
             <mat-tab label="Media">Media</mat-tab>
             <mat-tab label="Likes">Likes</mat-tab>

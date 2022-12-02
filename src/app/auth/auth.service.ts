@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 import { Router } from '@angular/router';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { UiService } from '../shared/ui.service';
 import { AuthData } from './auth-data.model';
 import { User } from './user.model';
@@ -13,11 +13,7 @@ import { UserService } from './user.service';
 })
 
 export class AuthService {
-
-  user = new BehaviorSubject<User>(null)
-
-
-
+  user = new BehaviorSubject<User>(null);
 
   constructor(
     private router:Router,
@@ -29,8 +25,7 @@ export class AuthService {
   initAuthListener(){
     this.afAuth.authState.subscribe(user => {
       if(user){
-        this.userService.getCurrentUserProfile(user.uid)
-
+        this.userService.setCurrentUserProfile(user.uid);
       }else{
         this.userService.userProfile.complete()
         this.router.navigate(['/welcome'])
@@ -40,7 +35,6 @@ export class AuthService {
 
   createNewUser(signUpdata:AuthData){
     this.afAuth.createUserWithEmailAndPassword(signUpdata.email,signUpdata.password).then(result => {
-
        this.userService.createProfile(signUpdata)
        this.router.navigate(['/welcome/signupstep'])
     }).catch(error=>{
@@ -51,8 +45,8 @@ export class AuthService {
   login(loginData:any){
     console.log(loginData)
     this.afAuth.signInWithEmailAndPassword(loginData.email,loginData.password).then(result => {
+      this.userService.setCurrentUserProfile(result.user.uid)
       this.router.navigate(['/home/timeline'])
-      this.userService.getCurrentUserProfile(result.user.uid)
     }).catch(error => {
       this.uiService.showSnackBar(error.message,undefined,7000)
     })

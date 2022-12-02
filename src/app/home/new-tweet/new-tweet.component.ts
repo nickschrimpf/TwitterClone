@@ -27,8 +27,10 @@ export class NewTweetComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true
     this.userProfileSub = this.userService.userProfile.subscribe(userProfile => {
+     if(userProfile != null || undefined){
       this.userProfile = userProfile
       this.isLoading = false
+     }
     })
     this.initForm()
 
@@ -51,10 +53,10 @@ export class NewTweetComponent implements OnInit {
   onSubmit(){
     this.tweetServ.newTweet({
       tweet:this.tweetForm.value.tweet,
-      auther:this.userProfile.flutterName,
-      autherId:this.userProfile.id,
-      autherDisplayName:this.userProfile.displayName,
-      autherPhotoURL:this.userProfile.profilePhotoURL,
+      postOwner:this.userProfile.flutterName,
+      ownerID:this.userProfile.id,
+      ownerUniqueName:this.userProfile.displayName,
+      ownerPhotoURL:this.userProfile.profilePhotoURL,
       replies:[],
       retweets:[],
       likes:[],

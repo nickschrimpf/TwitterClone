@@ -1,33 +1,59 @@
 <mat-dialog-content>
+
 <div mat-dialog-title>
   <button [mat-dialog-close]="true" mat-icon-button><mat-icon>close</mat-icon></button>
 </div>
 
-  <div class="tweet__content">
-    <div class="author_profile">
-        <div>
-            <img src="{{tweet.autherPhotoURL}}">
+<div class="tweet__content">
+  <div class="author_profile">
+    <img src="{{tweet.ownerPhotoURL}}">
+    <div class="retweet__line">
+    </div>
+    <img src="{{this.userServ.profile.profilePhotoURL}}">
+  </div>
+
+  <div class="tweet__body">
+    <div class="tweet__author_menu">
+        <div class="tweet__author">
+            <div class="tweet__author-name">
+                <span id="name">{{tweet.ownerUniqueName}}</span>
+            </div>
+            <div class="tweet__author-handle">
+                <span>@{{tweet.postOwner}}</span>
+            </div>
+            <div>
+                <span>.</span>
+            </div>
+            <div class="tweet__date">
+                <span>{{tweet.tweetDate | date :'shortDate'}}</span>
+            </div>
         </div>
     </div>
-    <div class="tweet__author">
-        <div class="tweet__author-name">
-            <span id="name">{{tweet.autherDisplayName}}</span>
-        </div>
-        <div class="tweet__author-handle">
-            <span>@{{tweet.auther}}</span>
-        </div>
-        <div>
-            <span>.</span>
-        </div>
-        <div class="tweet__date">
-            <span>{{tweet.tweetDate | date :'shortDate'}}</span>
-        </div>
+    <div class="tweet">
+        <p>{{tweet.tweet}}</p>
     </div>
+    <div class="reply">
+      <span>Replying to <span style="color: green;">@{{tweet.ownerUniqueName}}</span></span>
+    </div>
+    <form [formGroup]="retweetForm" (ngSubmit)="onSubmit()">
+      <div class="retweet">
+        <mat-form-field>
+          <textarea
+          formControlName="retweet"
+          placeholder="Retweet your reply"
+          maxlength="180"
+          type="text"
+          name="tweet"
+          matInput
+          autocomplete="on"
+          required></textarea>
+        </mat-form-field>
+      </div>
+      <button type="submit">submit</button>
+    </form>
   </div>
-  <div class="tweet__content">
-      <p>{{tweet.tweet}}</p>
-  </div>
-  </mat-dialog-content>
+</div>
+</mat-dialog-content>
 
 
 

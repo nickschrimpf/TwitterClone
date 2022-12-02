@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   profileOwner:boolean = false;
 
   constructor(
-    private userServ:UserService,
+    public userServ:UserService,
     private route:ActivatedRoute,
     private router:Router,
     private location:Location,
@@ -36,21 +36,19 @@ export class ProfileComponent implements OnInit, OnDestroy {
       .subscribe(
         (params:Params) => {
           const currenUserFlutterName = params['id']
+          console.log(currenUserFlutterName)
             this.profileUserSub = this.userServ.getUserProfilebyFN(currenUserFlutterName)
               .subscribe(user => {
-                console.log(user)
-
                   this.profileUser = user[0]
                   this.profileOwner = this.userServ.doesThisUserOwnThisProfile(user[0]['id'])
                   this.isFollowing = this.userServ.doesThisUserFollowthisProfile(user[0]['id'])
-                  console.log('isFollowing '+this.isFollowing)
                   this.loading = false
 
               })
       })
   }
   onBack(){
-    this.location.back()
+    this.location.back();
   }
   onAddNumberOfTweets(event){
     this.numberOfTweets = event;

@@ -9,7 +9,7 @@
         <div class="menu">
             <div class="account">
                 <div class="account__profile">
-                    <button *ngIf="this.userProfile" routerLink='{{[this.userProfile.flutterName]}}' (click)="onToggleSidenav()" mat-icon-button>
+                    <button *ngIf="this.userProfile" routerLink='/{{[this.userProfile.flutterName]}}' (click)="onToggleSidenav()" mat-icon-button>
                         <img src="{{this.userProfile.profilePhotoURL}}" alt="photo">
                     </button>
                     <button mat-icon-button>
@@ -21,8 +21,8 @@
                     <span>@{{this.userProfile.flutterName}}</span>
                 </div>
                 <div *ngIf="this.userProfile"class="followers">
-                    <span>following {{this.userProfile.following.length}} </span>
-                    <span> followers {{this.userProfile.followers.length}}</span>
+                    <span>following {{this.userProfile.following.length}}</span>
+                    <span>followers {{this.userProfile.followers.length}}</span>
                 </div>
             </div>
             <div class="menu_items">
@@ -44,14 +44,14 @@
                     <span>topics</span>
                 </button>
            </div>
-               
-                
+
+
             </div>
             <button mat-flat-button (click)="onLogOut()">
                 Log out
             </button>
         </div>
-        
+
 
     </mat-drawer-content>
 </mat-drawer-container>

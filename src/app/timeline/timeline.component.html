@@ -1,7 +1,7 @@
-<div class="spinner" *ngIf="isLoading">
+<div class="spinner" *ngIf="!tweets">
     <mat-spinner></mat-spinner>
 </div>
-<div *ngIf="!isLoading">
+<div *ngIf="tweets">
     <div class="timelineContainer">
         <app-tweet
         *ngFor="let tweet of tweets"

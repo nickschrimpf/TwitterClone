@@ -7,7 +7,7 @@
             <mat-icon>history_edu</mat-icon>
         </button>
     </div>
-    
+
     <!-- **IN TIMELINE TWEET FORM FOR SCREENS 500px OR ABOVE** -->
     <div class="lrgTweetForm">
         <div class="lrgTweetForm_group">
@@ -30,26 +30,26 @@
                                 <textarea
                                    formControlName="tweet"
                                     (mousedown)="showTweetGroup = true"
-                                    placeholder="What's happening?" 
-                                    maxlength="180" 
+                                    placeholder="What's happening?"
+                                    maxlength="180"
                                     type="text"
                                     name="tweet"
                                     matInput
-                                    autocomplete="on"
+                                    spellcheck="on"
                                     required>
                                 </textarea>
-                            </div> 
+                            </div>
                         </mat-form-field>
                         <div class="lrgformOptions">
-    
+
                             <!-- NEED TO MAKE THIS A BUTTON AND ADD A SNACK BAR -->
                             <div *ngIf="showTweetGroup" class="lrgRepyGroup">
                                 <mat-icon color="primary">public</mat-icon>
                                 <span>Everyone can replay</span>
-                            
+
                             </div>
-    
-                            
+
+
                             <div class="lrgTweetOptions">
                                 <div class="lrgTweetOptions_buttons">
                                     <button mat-icon-button color="primary" type="button">
@@ -81,7 +81,7 @@
                                             <mat-icon >add_circle_outline</mat-icon>
                                         </button>
                                     </div>
-                                
+
                                     <div class="lrgTweetButton">
                                         <button mat-raised-button color="primary"  type="submit">
                                             Tweet
@@ -89,7 +89,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -110,7 +110,7 @@
                         Tweet
                     </button>
                 </div>
-                
+
                 <div class="formBody">
                     <div class="accountPicture">
                         <img [src]="this.userProfile.profilePhotoURL">
@@ -127,21 +127,21 @@
                             <div class="form-group">
                                 <textarea
                                     formControlName="tweet"
-                                    placeholder="What's happening?" 
-                                    maxlength="180" 
+                                    placeholder="What's happening?"
+                                    maxlength="180"
                                     type="text"
                                     name="tweet"
                                     matInput
                                     autocomplete="on"
                                     required>
                                 </textarea>
-                            </div> 
+                            </div>
                         </mat-form-field>
                         <div class="formOptions">
                             <!-- NEED TO MAKE THIS A BUTTON AND ADD A SNACK BAR -->
                             <div class="repySelector">
                                 <mat-icon color="primary">public</mat-icon>
-                                <span>Everyone can replay</span>    
+                                <span>Everyone can replay</span>
                             </div>
                             <hr>
                             <div class="iconOptions">
@@ -170,5 +170,5 @@
             </form>
         </div>
     </div>
-    
+
 </div>

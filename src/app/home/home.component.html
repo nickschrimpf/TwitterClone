@@ -2,19 +2,15 @@
     <mat-sidenav #sidenav role="navigation">
       <app-side-nav-list (onCloseSidenav)="sidenav.close()"></app-side-nav-list>
     </mat-sidenav>
-  
-  
-  
+
     <mat-sidenav-content>
-       
-      
       <div class="content">
           <div class="main">
             <app-new-tweet></app-new-tweet>
             <router-outlet></router-outlet>
           </div>
           <div class="profile">
-            <p>search!</p> 
+            <p>search!</p>
               <br>
             <p>whats happening?</p>
           </div>
